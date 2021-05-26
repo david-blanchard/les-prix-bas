@@ -31,13 +31,22 @@
     @yield('stylesheets')
     <script src="/assets/js/vendor/jquery.slim.min.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.js"></script>
+    <script src="/js/cookies.js"></script>
+    @yield('header_javascripts')
+
 </head>
 
 <body class="d-flex flex-column h-100">
     @include('header_and_footer.header')
     @yield('children')
     @include('header_and_footer.footer')
-    @yield('javascripts')
+    <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/promo.js"></script>
+    <script>
+        showCookiesPopin();
+    </script>
+    @yield('body_javascripts')
     
 </body>
 
