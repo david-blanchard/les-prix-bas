@@ -9,7 +9,7 @@
 <div class="container marketing" >
 
     <div class='row featurette'>
-        @include('product_page.tabs')
+        @include('product_info.tabs')
  
         <div class='col-md-5 order-md-1'>
             <img
