@@ -37,9 +37,9 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    @include('header_and_footer.header')
+    @include('app.header')
     @yield('children')
-    @include('header_and_footer.footer')
+    @include('app.footer')
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/promo.js"></script>

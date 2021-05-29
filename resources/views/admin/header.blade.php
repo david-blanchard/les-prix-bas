@@ -1,6 +1,6 @@
 @php
-    $home = $_SERVER['REQUEST_URI'];
-    $logo = '/assets/images/logos/lesprixbas_small.png';
+    $home = route('home');
+    $logo = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
 
 <header>
@@ -16,9 +16,6 @@
         <div class='navbar-collapse offcanvas-collapse'>
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
-            @include('search.search_nav_bar')
-            @include('cart.cart_nav_button')
-            @include('user.user_nav_button')
         </div>
     </nav>
 
