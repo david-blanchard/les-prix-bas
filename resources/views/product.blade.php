@@ -1,4 +1,4 @@
-@extends('header_and_footer.main')
+@extends('layouts.app')
 @section('title')
 Les prix bas !
 @stop
@@ -12,7 +12,8 @@ Les prix bas !
 @stop
 
 @section('children')
-    @include('product_page.main')
+    {{-- @dump(Auth::user()) --}}
+    @include('product_info.main')
 @stop
 
 @section('body_javascripts')
