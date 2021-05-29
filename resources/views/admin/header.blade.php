@@ -16,6 +16,7 @@
         <div class='navbar-collapse offcanvas-collapse'>
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
+            @include('user.user_nav_button')
         </div>
     </nav>
 

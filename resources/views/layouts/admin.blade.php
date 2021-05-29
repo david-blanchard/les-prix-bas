@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/assets/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+
 
     <style>
         .bd-placeholder-img {

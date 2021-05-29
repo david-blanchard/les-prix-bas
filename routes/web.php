@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsController;
+use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +18,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Application routes
+ */
+
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::redirect('/', '/product', 301);
 
+/**
+ * Administrator area routes
+ */
+Route::get('/admin', function() {
+    return View('admin.main');
+});
+Route::get('/admin/products', [ProductsController::class, 'index'])->name('products_man');
+
+/**
+ * Products API routes
+ */
 Route::resource('/products', ProductsController::class);
 
+/**
+ * Authentication routes
+ */
 Auth::routes();
