@@ -37,7 +37,7 @@ Route::get('/admin/products', [ProductsController::class, 'index'])->name('produ
 /**
  * Products API routes
  */
-Route::resource('/products', ProductsController::class);
+Route::resource('/products', ProductsController::class)->middleware('admin');
 
 /**
  * Authentication routes
