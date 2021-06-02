@@ -13,7 +13,7 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <h2 class='featurette-heading'>
-                {{ $props->title }}
+                {{ $props->name }}
             </h2>
             <p class='lead'>
                 {{ $props->description }}
