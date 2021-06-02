@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Images;
+use App\Models\ProductImages;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,20 +28,75 @@ class ProductController extends Controller
     {
 
         $props = [];
-        $props['title'] = "Platine vinyle stéreo";
-        $props['description'] = "Platine vinyle compacte avec système de prise de son et capot de protection. Idéale pour réécouter les disques des années 70/80.";
-        $props['price'] = "49 €";
-        $props['image'] = "/assets/images/articles/platine-vinyle.jpg";
-        $props['caption'] = "Platine vinyle";
-        $props['featuresCaption'] = "En détails";
-        $props['features'] = [];
-        $props['features'][] = "Platine vinyle compacte";
-        $props['features'][] = "Haut-parleurs intégrés";
-        $props['features'][] = "Fonction start/stop";
-        $props['features'][] = "Sortie casque jack 3,5mm";
-        $props['features'][] = "Vitesse de lecture 45 et 33 tours";
+
+        $productId = 1;
+        $products = Products::where('id', $productId)->get();
+        $product = $products->first();
+        $props = $product->getAttributes();
+
+        [$props['description'], $props['featuresCaption'], $props['features']] = $this->grabDescriptionAndFeatures($props['description']);
+
+        $images = $this->getImages($productId);
+        $props['image'] = $images[0][0];
+        $props['caption'] = $images[0][1];
 
         $props = (object) $props;
         return View('product', ['props' => $props]);
+    }
+
+    private function getImages(int $productId): array
+    {
+        $result = [];
+
+        $productImages = ProductImages::where('product', $productId)->get();
+        $imagesId = [];
+        $productImages->each(function ($item) use (&$imagesId) {
+            $props = $item->getAttributes();
+            array_push($imagesId, $props['image']);
+        });
+
+        $images = Images::whereIn('id', $imagesId)->get();
+
+        $images->each(function($item) use (&$result) {
+            $image = $item->getAttributes();
+            array_push($result, [$image['url'], $image['alt']]);
+        });
+
+        return $result;
+    }
+
+    private function grabDescriptionAndFeatures(string $phrase): array
+    {
+
+        $rule = '/(?:([^§]*)(?:[^§]|.))§?/m';
+        $subject = str_replace('§', ' §', $phrase) . ' §';
+        preg_match_all($rule, $subject, $matches, PREG_SET_ORDER, 0);
+
+        $description = $matches[0][1];
+
+        $featuresCaption = isset($matches[1]) ? $matches[1][1] : null;
+
+        $featuresSet = isset($matches[2]) ? $matches[2][1] : '';
+
+        $features = $this->grabFeatures($featuresSet);
+
+        return [$description, $featuresCaption, $features];
+    }
+
+    private function grabFeatures(string $phrase): array
+    {
+        $features = [];
+
+        $rule = '/(?:([^\|]*)(?:[^\|]|.))\|?/m';
+        $subject = str_replace('|', ' |',  $phrase) . ' |';
+        preg_match_all($rule, $subject, $matches, PREG_SET_ORDER, 0);
+
+        if (count($matches)) {
+            $features = array_map(function ($item) {
+                return $item[1];
+            }, $matches);
+        }
+
+        return $features;
     }
 }
