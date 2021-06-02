@@ -13,7 +13,7 @@ class CreateProductInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_info', function (Blueprint $table) {
+        Schema::create('product_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product')->references('id')->on('products');
             $table->foreignId('images')->references('id')->on('product_images');
@@ -28,6 +28,6 @@ class CreateProductInfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_info');
+        Schema::dropIfExists('product_infos');
     }
 }
