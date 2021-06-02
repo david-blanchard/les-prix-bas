@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Images extends Model
 {
     use HasFactory;
 
@@ -15,18 +15,8 @@ class Products extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'brand',
+        'url',
+        'alt',
+        'title',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-    ];
-
 }
