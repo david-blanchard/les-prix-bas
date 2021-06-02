@@ -1,19 +1,27 @@
 @php
     $home = $_SERVER['REQUEST_URI'];
-    $logo = '/assets/images/logos/lesprixbas_small.png';
+    $logo_desktop = '/assets/images/logos/lesprixbas_small.png';
+    $logo_mobile = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
 
 <header>
-    <nav class='navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm'>
+    <nav id="navbar0" class='navbar navbar-expand-md fixed-top navbar-dark bg-white shadow-sm'>
         <a class='navbar-brand mr-auto mr-lg-0' href='{{ $home }}'>
-            <img src='{{ $logo }}' alt='Les Prix Bas' />
+            <picture>
+                <source 
+                srcset="{{ $logo_mobile }}" media="(max-width: 1200px)" 
+                srcset="{{ $logo_desktop }}" media="(min-width: 1200px)" 
+                />
+                <img id="logo" src='{{ $logo_desktop }}' alt='Les Prix Bas' />
+
+            </picture>
         </a>
 
         <a class='navbar-toggler p-0 border-0' type='button' data-toggle='offcanvas' href='{{ $home }}'>
             <span class='navbar-toggler-icon' />
         </a>
 
-        <div class='navbar-collapse offcanvas-collapse'>
+        <div id="subnavbar0" class='navbar-collapse offcanvas-collapse'>
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
             @include('search.search_nav_bar')

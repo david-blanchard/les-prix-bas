@@ -22,9 +22,49 @@
             user-select: none;
         }
 
+        @media (min-width: 1280px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
+            }
+            #breadcrumb0 {
+                position: sticky;
+                padding-top: 31px;
+                float: left;
+            }
+        }
+
+        @media (max-width: 420px) {
+            #dropdown01 {
+                bottom: 88px;
+                position: relative;
+                left: 59%;
+            }
+            #cartCta {
+                bottom: 88px;
+                position: relative;
+                left: 61%;
+            }
+            #navbar0 {
+                height: 88px;
+            }
+            #subnavbar0 {
+                height: 44px;
+            }
+
+            #breadcrumb0 {
+                position: sticky;
+                padding-top: 55px;
+                float: left;
+            }
+            
+            #form0 {
+                width: 100%;
             }
         }
     </style>
