@@ -15,9 +15,9 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         Products::create([
-            'name' => "Platine vinyle stéréo",
-            'description' => "Platine vinyle compacte avec système de prise de son et capot de protection. Idéale pour réécouter les disques des années 70/80.§En détails§Platine vinyle compacte|Haut-parleurs intégrés|Fonction start/stop|Sortie casque jack 3,5mm|Vitesse de lecture 45 et 33 tours",
-            'price' => 49.0,
+            'name' => "Veste en jean cintrée manches longues femme Bleu",
+            'description' => "Veste. Col chemise. Fermeture par boutons métalliques. Manches longues avec poignets et boutons. Poches plaquées à rabats sur poitrine. Poches passepoilées sur les côtés. Empiècements.§À savoir§Ne pas nettoyer à sec|lavage à 30 degrés|100% coton",
+            'price' => 37.99,
             'brand' => 1,
         ]);
     }

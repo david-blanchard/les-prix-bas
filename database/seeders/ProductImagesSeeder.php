@@ -19,5 +19,17 @@ class ProductImagesSeeder extends Seeder
             'product' => 1,
             'image' => 1,
         ]);
+        ProductImages::create([
+            'product' => 1,
+            'image' => 2,
+        ]);
+        ProductImages::create([
+            'product' => 1,
+            'image' => 3,
+        ]);
+        ProductImages::create([
+            'product' => 1,
+            'image' => 4,
+        ]);
     }
 }

@@ -16,7 +16,7 @@ class BrandsSeeder extends Seeder
     {
         //
         Brands::create([
-            "name" => "Auna"
+            "name" => "Venca"
         ]);
     }
 }
