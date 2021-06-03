@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\Images;
 use App\Models\ProductImages;
 use App\Models\Products;
@@ -26,22 +27,45 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-        $props = [];
-
         $productId = 1;
-        $products = Products::where('id', $productId)->get();
-        $product = $products->first();
-        $props = $product->getAttributes();
+
+        $props = $this->getProductProperties($productId);
+        $props['brand'] = $this->getBrand($props['brand']);
 
         [$props['description'], $props['featuresCaption'], $props['features']] = $this->grabDescriptionAndFeatures($props['description']);
 
         $images = $this->getImages($productId);
-        $props['image'] = $images[0][0];
-        $props['caption'] = $images[0][1];
+
+        $json = json_encode($images);
+        $images = json_decode($json);
+        $props['images'] = $images;
 
         $props = (object) $props;
+
         return View('product', ['props' => $props]);
+    }
+
+    private function getProductProperties(int $productId): array
+    {
+        $result = [];
+
+        $products = Products::where('id', $productId)->get();
+        $product = $products->first();
+        $result = $product->getAttributes();
+
+        return $result;
+    } 
+
+    private function getBrand(int $brandId): string
+    {
+        $result = '';
+
+        $brands = Brands::where('id', $brandId)->get();
+        if(count($brands)) {
+            $result = $brands->first()->getAttributes()['name'];
+        }
+
+        return $result;
     }
 
     private function getImages(int $productId): array
@@ -59,7 +83,7 @@ class ProductController extends Controller
 
         $images->each(function($item) use (&$result) {
             $image = $item->getAttributes();
-            array_push($result, [$image['url'], $image['alt']]);
+            array_push($result, $image);
         });
 
         return $result;
@@ -87,7 +111,7 @@ class ProductController extends Controller
     {
         $features = [];
 
-        $rule = '/(?:([^\|]*)(?:[^\|]|.))\|?/m';
+        $rule = '/(?:([^|]*)(?:[^|]|.))\|?/';
         $subject = str_replace('|', ' |',  $phrase) . ' |';
         preg_match_all($rule, $subject, $matches, PREG_SET_ORDER, 0);
 
