@@ -1,22 +1,34 @@
-<nav id="breadcrumb0" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Hi-Fi</a></li>
-        <li class="breadcrumb-item"><a href="#">Platines Vinyles</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Auna</li>
-    </ol>
-</nav>
-
-<div class="container marketing" >
-
-    <div class='row featurette'>
-        @include('product_info.tabs')
+@include('product_info.breadcrumb')
  
+<div class="container marketing" >
+    <div class='row featurette'>
+
+        @include('product_info.tabs')
         <div class='col-md-5 order-md-1'>
-            <img
-            src='{{ $props->image }}' alt='{{ $props->caption }}'
-            class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto' width='500' height='500'
-            preserveAspectRatio='xMidYMid slice' focusable='false' aria-label='{{ $props->caption }}'
-            />
+
+            @php
+                $image = $props->images[0];
+                $size = 500;
+            @endphp
+            
+            <div id="main-picto">
+            @include('product_info.image')
+            </div>
+
+            @php
+                $size = 50;
+            @endphp
+
+            @foreach( $props->images as $image)
+            @if ($loop->first)
+            <button id="first-picto" class="btn focus" focusable='true' name="btn-picto" data-toggle="button" aria-pressed="true" >
+            @else
+            <button class="btn"  name="btn-picto" focusable='true' data-toggle="button" aria-pressed="true" >
+            @endif
+            @include('product_info.image')
+            </button>
+            @endforeach
         </div>
+
     </div>
 </div>

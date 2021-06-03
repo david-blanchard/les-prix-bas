@@ -1,4 +1,13 @@
 <div class='col-md-7 order-md-2'>
+
+    <div class='row' >
+        
+        <div class='badge-pill'> {{ $props->name }} </div>
+        <div class='badge-pill'> {{ $props->brand }} </div>
+
+        <div class='badge-pill'> {{ $props->price }} </div>
+
+    </div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Description</a>
@@ -12,20 +21,19 @@
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <h2 class='featurette-heading'>
-                {{ $props->name }}
-            </h2>
+            {{-- <h2 class='featurette-heading'>
+            </h2> --}}
             <p class='lead'>
                 {{ $props->description }}
             </p>
-
-            <label htmlFor='pros'>{{ $props->featuresCaption }} :</label>
-            <ul id='pros'>
+            @if($props->featuresCaption !== null)
+            <label htmlFor='features'>{{ $props->featuresCaption }} :</label>
+            <ul id='features'>
                 @foreach ($props->features as $item) 
                     <li> {{ $item }} </li>     
                 @endforeach
             </ul>
-            <div class='badge-pill'> {{ $props->price }} </div>
+            @endif
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             ...

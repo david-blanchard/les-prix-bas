@@ -83,11 +83,11 @@
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/promo.js"></script>
+
+    @yield('body_javascripts')
     <script>
         showCookiesPopin();
-    </script>
-    @yield('body_javascripts')
-    
+    </script>   
 </body>
 
 </html>
