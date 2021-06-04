@@ -2,8 +2,11 @@
  
 <div class="container marketing" >
     <div class='row featurette'>
+        <div class='col-md-7 order-md-2'>
+            @include('product_info.tabs')
+            @include('product_info.quantity')
+        </div>
 
-        @include('product_info.tabs')
         <div class='col-md-5 order-md-1'>
 
             @php
@@ -21,9 +24,9 @@
 
             @foreach( $props->images as $image)
             @if ($loop->first)
-            <button id="first-picto" class="btn focus" focusable='true' name="btn-picto" data-toggle="button" aria-pressed="true" >
+            <button class="btn focus" name="btn-picto" focusable="true" data-toggle="button" aria-pressed="true" >
             @else
-            <button class="btn"  name="btn-picto" focusable='true' data-toggle="button" aria-pressed="true" >
+            <button class="btn" name="btn-picto" focusable="true" data-toggle="button" aria-pressed="true" >
             @endif
             @include('product_info.image')
             </button>

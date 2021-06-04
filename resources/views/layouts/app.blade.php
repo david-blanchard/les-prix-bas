@@ -40,15 +40,15 @@
         }
 
         @media (max-width: 420px) {
+            #cart-cta {
+                bottom: 88px;
+                position: relative;
+                left: 50%;
+            }
             #dropdown01 {
                 bottom: 88px;
                 position: relative;
-                left: 59%;
-            }
-            #cartCta {
-                bottom: 88px;
-                position: relative;
-                left: 61%;
+                left: 47%;
             }
             #navbar0 {
                 height: 88px;
@@ -71,7 +71,7 @@
     @yield('stylesheets')
     <script src="/assets/js/vendor/jquery.slim.min.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.js"></script>
-    <script src="/js/cookies.js"></script>
+    {{-- <script src="/js/cookies.js"></script> --}}
     @yield('header_javascripts')
 
 </head>
@@ -80,14 +80,14 @@
     @include('app.header')
     @yield('children')
     @include('app.footer')
-    <script src="/js/main.js"></script>
-    <script src="/js/cart.js"></script>
-    <script src="/js/promo.js"></script>
+    {{-- <script src="/js/main.js"></script> --}}
+    {{-- <script src="/js/cart.js"></script> --}}
+    {{-- <script src="/js/promo.js"></script> --}}
 
     @yield('body_javascripts')
-    <script>
+    {{-- <script>
         showCookiesPopin();
-    </script>   
+    </script>    --}}
 </body>
 
 </html>

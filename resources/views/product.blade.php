@@ -16,5 +16,4 @@ Les prix bas !
 
 @section('body_javascripts')
     <script src="/js/product-page.js" ></script>
-
 @stop
