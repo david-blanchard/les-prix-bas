@@ -22,16 +22,17 @@ use Illuminate\Support\Facades\Route;
  * Application routes
  */
 
+Route::get('/', [ProductController::class, 'index'])->name('root');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::redirect('/', '/product', 301);
+// Route::redirect('/', '/product', 301);
 
 /**
  * Administrator area routes
  */
 Route::get('/admin', function() {
     return View('admin.main');
-});
+})->name('admin');
 Route::get('/admin/products', [ProductsController::class, 'index'])->name('products_man');
 
 /**
