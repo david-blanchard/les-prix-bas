@@ -1,5 +1,5 @@
 @php
-    $home = $_SERVER['REQUEST_URI'];
+    $home = route('root');
     $logo = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
 

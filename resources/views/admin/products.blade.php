@@ -10,7 +10,8 @@ Les prix bas !
 @stop
 
 @section('children')
-<div class="container marketing">
+{{-- @include('admin.breadcrumb') --}}
+<div class="container">
     <h4>Products</h4>
 </div>
 @stop

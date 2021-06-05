@@ -11,6 +11,8 @@ Les prix bas !
 @stop
 
 @section('children')
+    @include('product_info.breadcrumb')
+
     @include('product_info.main')
 @stop
 

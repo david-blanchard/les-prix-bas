@@ -22,6 +22,8 @@
             user-select: none;
         }
 
+ 
+
         @media (min-width: 1280px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -34,8 +36,15 @@
             }
             #breadcrumb0 {
                 position: sticky;
-                padding-top: 31px;
+                /* padding-top: 31px; */
                 float: left;
+            }
+
+            #subnavbar1 {
+            }
+            #placeholder {
+                top: 88px;
+                height: 78px;
             }
         }
 
@@ -59,10 +68,16 @@
 
             #breadcrumb0 {
                 position: sticky;
-                padding-top: 55px;
+                /* padding-top: 55px; */
                 float: left;
             }
-            
+            #subnavbar1 {
+                padding-top: 10px;
+            }
+            #placeholder {
+                top: 88px;
+                height: 78px;
+            }
             #form0 {
                 width: 100%;
             }
@@ -77,9 +92,9 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    @include('app.header')
+    @include('header.app')
     @yield('children')
-    @include('app.footer')
+    @include('footer.app')
     {{-- <script src="/js/main.js"></script> --}}
     {{-- <script src="/js/cart.js"></script> --}}
     {{-- <script src="/js/promo.js"></script> --}}

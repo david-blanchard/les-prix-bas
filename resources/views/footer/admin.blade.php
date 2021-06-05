@@ -1,5 +1,5 @@
 @php
-    $home = route('home');
+    $home = route('admin');
     $logo = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
 

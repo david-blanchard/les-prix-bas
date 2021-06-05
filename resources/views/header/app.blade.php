@@ -1,5 +1,5 @@
 @php
-    $home = $_SERVER['REQUEST_URI'];
+    $home = route('root');
     $logo_desktop = '/assets/images/logos/lesprixbas_small.png';
     $logo_mobile = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
@@ -17,10 +17,6 @@
             </picture>
         </a>
 
-        <a class='navbar-toggler p-0 border-0' type='button' data-toggle='offcanvas' href='{{ $home }}'>
-            <span class='navbar-toggler-icon' />
-        </a>
-
         <div id="subnavbar0" class='navbar-collapse offcanvas-collapse'>
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
@@ -28,16 +24,20 @@
             @include('cart.cart_nav_button')
             @include('user.user_nav_button')
         </div>
+        
+ 
     </nav>
 
-    <div class='nav-scroller bg-light shadow-sm'>
+    <div id="placeholder" aria-label="placeholder">
+    
+    </div>
+    
+    <div id="subnavbar1" class='nav-scroller bg-light shadow-sm'>
         <nav class='nav nav-underline'>
-            <li class='nav-item active'>
-                <a class='nav-link badge badge-pill bg-light align-text-bottom' href='{{ $home }}'>Tous nos rayons <span class='sr-only'>(current)</span></a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link text-dark' href='{{ $home }}'>Promos</a>
-            </li>
+            <div class='nav-item active'>
+                <a class='nav-link  bg-light align-text-bottom' href='{{ $home }}'>Tous nos rayons <span class='sr-only'>(current)</span></a>
+            </div>
         </nav>
     </div>
 </header>
+

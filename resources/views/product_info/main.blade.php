@@ -1,4 +1,3 @@
-@include('product_info.breadcrumb')
  
 <div class="container marketing" >
     <div class='row featurette'>
