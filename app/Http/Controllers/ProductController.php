@@ -6,8 +6,10 @@ use App\Models\Brands;
 use App\Models\Images;
 use App\Models\ProductImages;
 use App\Models\Products;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
@@ -28,24 +30,48 @@ class ProductController extends Controller
     public function index()
     {
         $productId = 1;
+        $attr = $this->getAttributesByProductId($productId);
+        $props = $this->attributesToProperties($attr);
+        $props = (object) $props;
 
-        $props = $this->getProductProperties($productId);
-        $props['brand'] = $this->getBrand($props['brand']);
+        return View('product', ['props' => $props]);
+    }
 
-        [$props['description'], $props['featuresCaption'], $props['features']] = $this->grabDescriptionAndFeatures($props['description']);
+    public function show($slug)
+    {
+        $slug2 = Str::slug($slug);
+        $product = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug2 . '%')->get();
+        $attr = $product->first()->getAttributes();
 
+        if(count($attr)) {
+            $props = $this->attributesToProperties($attr);
+            $props = (object) $props;
+
+            return View('product', ['props' => $props]);
+        }
+
+        return View('home');
+    } 
+
+    private function attributesToProperties(array $attributes): array
+    {
+        $props = $attributes;
+
+        $productId = $attributes['id'];
+        $props['brand'] = $this->getBrand($attributes['brand']);
+
+        $props['featuresCaption'] = 'Information complémentaires';
+        $props['features'] = $this->grabMoreInfo($attributes['more_info']);
         $images = $this->getImages($productId);
 
         $json = json_encode($images);
         $images = json_decode($json);
         $props['images'] = $images;
 
-        $props = (object) $props;
-
-        return View('product', ['props' => $props]);
+        return $props;
     }
 
-    private function getProductProperties(int $productId): array
+    private function getAttributesByProductId(int $productId): array
     {
         $result = [];
 
@@ -72,55 +98,22 @@ class ProductController extends Controller
     {
         $result = [];
 
-        $productImages = ProductImages::where('product', $productId)->get();
-        $imagesId = [];
-        $productImages->each(function ($item) use (&$imagesId) {
-            $props = $item->getAttributes();
-            array_push($imagesId, $props['image']);
-        });
+        $images = DB::table('images')
+        ->join('product_images', function ($join) use ($productId) {
+            $join->on('images.id', '=', 'product_images.image')
+                 ->where('product_images.product', '=', $productId);
+        })->get();
 
-        $images = Images::whereIn('id', $imagesId)->get();
-
-        $images->each(function($item) use (&$result) {
-            $image = $item->getAttributes();
-            array_push($result, $image);
-        });
+        $result = $images->toArray();
 
         return $result;
     }
 
-    private function grabDescriptionAndFeatures(string $phrase): array
+    private function grabMoreInfo(string $phrase): array
     {
+        $result = [];
+        $result = explode(';', $phrase);
 
-        $rule = '/(?:([^§]*)(?:[^§]|.))§?/m';
-        $subject = str_replace('§', ' §', $phrase) . ' §';
-        preg_match_all($rule, $subject, $matches, PREG_SET_ORDER, 0);
-
-        $description = $matches[0][1];
-
-        $featuresCaption = isset($matches[1]) ? $matches[1][1] : null;
-
-        $featuresSet = isset($matches[2]) ? $matches[2][1] : '';
-
-        $features = $this->grabFeatures($featuresSet);
-
-        return [$description, $featuresCaption, $features];
-    }
-
-    private function grabFeatures(string $phrase): array
-    {
-        $features = [];
-
-        $rule = '/(?:([^|]*)(?:[^|]|.))\|?/';
-        $subject = str_replace('|', ' |',  $phrase) . ' |';
-        preg_match_all($rule, $subject, $matches, PREG_SET_ORDER, 0);
-
-        if (count($matches)) {
-            $features = array_map(function ($item) {
-                return $item[1];
-            }, $matches);
-        }
-
-        return $features;
+        return $result;
     }
 }

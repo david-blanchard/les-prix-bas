@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 1024);
+            $table->string('more_info', 1024);
             $table->float('price');
             $table->foreignId('brand')->references('id')->on('brands');
             $table->string('slug')->nullable();
