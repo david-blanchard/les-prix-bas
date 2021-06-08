@@ -37,4 +37,18 @@ class ProductsHelper
 
         return $result;
     }
+
+    public static function computeDiscount(float|string $price, int $percent): float
+    {
+        $result = 0.00;
+
+        if(is_string($price)) {
+            $price = floatval($price);
+        }
+
+        $price = $price - $price * $percent / 100;
+        $result = ceil(round($price, 2) * 100) / 100;
+
+        return $result;
+    }
 }

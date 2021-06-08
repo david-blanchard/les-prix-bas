@@ -52,13 +52,13 @@ class ProductController extends Controller
 
     private function attributesToProperties(array $props): array
     {
-
         $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
+        $props['discount'] = ProductsHelper::computeDiscount($props['price'], 25);
 
         $props['featuresCaption'] = 'Information complémentaires';
         $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
-        $images = ImagesHelper::getImagesByProductId($props['id']);
 
+        $images = ImagesHelper::getImagesByProductId($props['id']);
         $props['images'] = $images;
 
         return $props;
