@@ -50,19 +50,15 @@ class ProductController extends Controller
         return View('home');
     } 
 
-    private function attributesToProperties(array $attributes): array
+    private function attributesToProperties(array $props): array
     {
-        $props = $attributes;
 
-        $productId = $attributes['id'];
-        $props['brand'] = BrandsHelper::getBrandNameById($attributes['brand']);
+        $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
 
         $props['featuresCaption'] = 'Information complémentaires';
-        $props['features'] = ProductsHelper::grabMoreInfo($attributes['more_infos']);
-        $images = ImagesHelper::getImagesByProductId($productId);
+        $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
+        $images = ImagesHelper::getImagesByProductId($props['id']);
 
-        $json = json_encode($images);
-        $images = json_decode($json);
         $props['images'] = $images;
 
         return $props;
