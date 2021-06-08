@@ -13,7 +13,7 @@ Les prix bas !
 @section('children')
     @include('product_info.breadcrumb')
 
-    @include('product_info.main')
+    @include('product_info.index')
 @stop
 
 @section('body_javascripts')
