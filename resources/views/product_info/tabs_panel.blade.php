@@ -1,11 +1,3 @@
-<div class='row' >
-    
-    <div class='badge-pill'> {{ $props->name }} </div>
-    <div class='badge-pill'> {{ $props->brand }} </div>
-
-    <div id="price-tag" name="unit-price" class='badge-pill'> {{ $props->price }} </div>
-
-</div>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Description</a>

@@ -2,7 +2,8 @@
 <div class="container marketing" >
     <div class='row featurette'>
         <div class='col-md-7 order-md-2'>
-            @include('product_info.tabs')
+            @include('product_info.top_panel')
+            @include('product_info.tabs_panel')
             @include('product_info.quantity')
         </div>
 
