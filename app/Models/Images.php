@@ -19,4 +19,11 @@ class Images extends Model
         'alt',
         'title',
     ];
+
+    public function productImages()
+    {
+        return $this->hasMany(ProductImages::class);
+    }
+
+
 }
