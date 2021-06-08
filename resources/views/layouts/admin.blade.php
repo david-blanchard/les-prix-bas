@@ -43,10 +43,11 @@
             }
 
             #subnavbar1 {
+                /* */
             }
             #placeholder {
                 /* top: 88px; */
-                height: 58px;
+                height: 74px;
             }
         }
 

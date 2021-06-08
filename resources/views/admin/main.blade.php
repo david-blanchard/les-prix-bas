@@ -10,11 +10,9 @@ Les prix bas !
 @stop
 
 @section('children')
-    {{-- @include('admin.breadcrumb') --}}
-    <div class="container">
-        @dump(Auth::user())
-
-    </div>
+<div class="container">
+    @dump(Auth::user())
+</div>
 @stop
 
 @section('body_javascripts')

@@ -19,6 +19,8 @@
         <div id="subnavbar0" class='navbar-collapse offcanvas-collapse'>
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
+            @include('search.search_nav_bar')
+
             @include('user.user_nav_button')
         </div>
         
@@ -39,6 +41,21 @@
             <div class='nav-item active'>
                 <a class="nav-link  bg-light " href="{{ route('products_man') }}">
                     Gérer les produits
+                </a>
+            </div>
+            <div class='nav-item active'>
+                <a class="nav-link  bg-light " href="{{ route('product_images_man') }}">
+                    Gérer les images par produit
+                </a>
+            </div>
+            <div class='nav-item active'>
+                <a class="nav-link  bg-light " href="{{ route('images_man') }}">
+                    Gérer la bibliothèque d'images
+                </a>
+            </div>
+            <div class='nav-item active'>
+                <a class="nav-link  bg-light " href="{{ route('brands_man') }}">
+                    Gérer les marques
                 </a>
             </div>
         </nav>
