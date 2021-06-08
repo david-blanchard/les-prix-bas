@@ -11,7 +11,18 @@ Les prix bas !
 
 @section('children')
 <div class="container">
-    @dump(Auth::user())
+    <div class="row my-5 mx-3 justify-content-center">
+        <h1>
+            Bienvenue dans l'Admin UI
+        </h1>
+    </div>
+
+        <div class="row my-5 mx-3 justify-content-center">
+
+        <h2>
+        Choisissez une option du menu
+        </h2>
+    </div>
 </div>
 @stop
 
