@@ -24,4 +24,14 @@ class Admin
         }
         return $next($request);
     }
+
+    public static function userIsAdmin(): bool
+    {
+        $result = false;
+        $user = Auth::user();
+        
+        $result = $user !== null ? $user->role === User::ADMIN_ROLE : false;
+
+        return $result;
+    }
 }
