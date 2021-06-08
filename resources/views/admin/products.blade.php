@@ -20,7 +20,7 @@ Les prix bas !
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </h2>
-    <table class="table table-striped table-sm">
+    <table class="table table-striped table-hover table-sm">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
@@ -41,8 +41,16 @@ Les prix bas !
                         <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
                 </th>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->description }}</td>
+                <td>
+                    <a href="{{ route("product", $item->slug) }}" title="Tester le produit" >
+                    {{ $item->name }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ route("product", $item->slug) }}" title="Tester le produit" >
+                    {{ $item->description }}
+                    </a>
+                </td>
                 @php
                     $infos = explode(';', $item->more_infos);
                 @endphp
