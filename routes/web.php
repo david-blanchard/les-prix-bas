@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImagesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +32,16 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::redirect('/', '/product', 301);
 
 /**
+ * Session routes
+ */
+Route::post('/session/store', [SessionController::class, 'store'])->name('session.store');
+Route::post('/session/retrieve', [SessionController::class, 'retrieve'])->name('session.retrieve');
+
+/**
  * Administrator area routes
  */
 Route::get('/admin', function() {
-    return View('admin.main');
+    return view('admin.main');
 })->name('admin');
 
 Route::get('/admin/products', [ProductsController::class, 'index'])->middleware('admin')->name('products_man');
