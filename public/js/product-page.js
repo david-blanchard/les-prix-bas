@@ -1,79 +1,78 @@
-class ProductPage 
-{
+class ProductPage {
     constructor() {
-        this.quantityCounter = document.querySelector('span[id="quantity"][name="count"]')
-        this.cartSum = document.querySelector('button[id="cart-cta"] span[id="cart-total"][name="price"]')
-        this.cartCounter = document.querySelector('button[id="cart-cta"] span[id="cart-count"][name="quantity"]')
-        this.productPrice = document.querySelector('div[id="price-tag"][name="unit-price"]')
+        this.quantityComponent = document.querySelector(
+            'span[id="quantity"][name="count"]'
+        );
+        this.productComponent = document.querySelector(
+            'div[id="product"][name="product-data"]'
+        );
+    }
+
+    get productId() {
+        const product = this.productComponent;
+        const id = product.dataset["id"];
+
+        return id;
     }
 
     get quantity() {
-        let count = parseInt(this.quantityCounter.innerHTML) 
-        count = count === NaN ? 1 : count
+        let count = parseInt(this.quantityComponent.innerText);
+        count = count === NaN ? 1 : count;
 
-        return count
-    }
-
-    get cartCount() {
-        var count = parseInt(this.cartCounter.innerHTML) 
-        count = count === NaN ? 1 : count
-
-        return count
-    }
-
-    get priceTag() {
-        let price = parseFloat(this.productPrice.innerText)
-        price = price === NaN ? 1.00 : price
-
-        return price
+        return count;
     }
 
     bindImages() {
-        document.querySelectorAll('img[name="picto"]').forEach(item => {
-            item.src = item.dataset['src']
-        })
+        document.querySelectorAll('img[name="picto"]').forEach((item) => {
+            item.src = item.dataset["src"];
+        });
     }
-    
-    attachImageEvents() {
-        var mainPicto = document.querySelector('#main-picto img[name="picto"]')
 
-        document.querySelectorAll('button[name="btn-picto"]').forEach(item => {
-            item.onclick = e => {
-                mainPicto.src = e.target.dataset['src']
-            }
-        })
+    attachImageEvents() {
+        const mainPicto = document.querySelector(
+            '#main-picto img[name="picto"]'
+        );
+
+        document
+            .querySelectorAll('button[name="btn-picto"]')
+            .forEach((item) => {
+                item.onclick = (e) => {
+                    mainPicto.src = e.target.dataset["src"];
+                };
+            });
     }
 
     attachQuantityEvents() {
-
-        document.querySelectorAll('a[name="quantity-handler"]').forEach(item => {
-            var operand = item.id
-            item.onclick = () => {
-                var inc = (operand === 'more') ? 1 : (operand === 'less') ? -1 : 0
-                var count = this.quantity + inc
-                count = count < 1 ? 1 : count
-                this.quantityCounter.innerHTML = count
-            }
-        })
+        document
+            .querySelectorAll('a[name="quantity-handler"]')
+            .forEach((item) => {
+                const operand = item.id;
+                item.onclick = () => {
+                    const inc =
+                        operand === "more" ? 1 : operand === "less" ? -1 : 0;
+                    let count = this.quantity + inc;
+                    count = count < 1 ? 1 : count;
+                    this.quantityComponent.innerText = count;
+                };
+            });
     }
 
     attachAddToCartEvent() {
-        var addToCart = document.querySelector('button[id="add-to-cart"]')
+        let addToCart = document.querySelector('button[id="add-to-cart"]');
 
         addToCart.onclick = () => {
-            let q = this.quantity + this.cartCount
-
-            this.cartCounter.innerHTML = q
-            this.cartSum.innerHTML =  (q * this.priceTag).toFixed(2)
-        }
+            const cartMan = new CartManager()
+            cartMan.storeCart(this.productId, this.quantity);
+        };
     }
+
 }
 
 (() => {
-    var page = new ProductPage()
-    page.attachImageEvents()
-    page.bindImages()
-    page.attachQuantityEvents()
-    page.attachAddToCartEvent()
+    let page = new ProductPage();
+    page.bindImages();
+    page.attachImageEvents();
+    page.attachQuantityEvents();
+    page.attachAddToCartEvent();
 
-})()
+})();
