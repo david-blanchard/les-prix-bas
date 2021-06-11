@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\BrandsHelper;
-use App\Helpers\ImagesHelper;
-use App\Helpers\ProductsHelper;
+use App\Library\Helpers\BrandsHelper;
+use App\Library\Helpers\ImagesHelper;
+use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use Illuminate\Support\Str;
 class ProductController extends Controller

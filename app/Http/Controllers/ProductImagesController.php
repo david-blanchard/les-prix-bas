@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\BrandsHelper;
-use App\Helpers\ImagesHelper;
+use App\Library\Helpers\BrandsHelper;
+use App\Library\Helpers\ImagesHelper;
 use App\Models\Images;
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\ProductInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +40,6 @@ class ProductImagesController extends Controller
      */
     public function create($productId)
     {
-        //
         $product = Product::where('id', $productId)->get()->first();
         $productName = $product['name'];
         $brand = BrandsHelper::getBrandNameById($product['brand']);
@@ -64,9 +62,6 @@ class ProductImagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        // dd($request);
         $productId = $request->input('product');
         ProductImages::create([
             'product' => $productId,
@@ -79,10 +74,10 @@ class ProductImagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductInfo  $productInfo
+     * @param  \App\Models\ProductImages  $productImages
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductInfo $productInfo)
+    public function show(ProductImages $productImages)
     {
         //
     }
@@ -90,10 +85,10 @@ class ProductImagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductInfo  $productInfo
+     * @param  \App\Models\ProductImages  $productImages
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductInfo $productInfo)
+    public function edit(ProductImages $productImages)
     {
         //
     }
@@ -102,10 +97,10 @@ class ProductImagesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductInfo  $productInfo
+     * @param  \App\Models\ProductImages  $productImages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductInfo $productInfo)
+    public function update(Request $request, ProductImages $productImages)
     {
         //
     }
@@ -113,10 +108,10 @@ class ProductImagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductInfo  $productInfo
+     * @param  \App\Models\ProductImages  $productImages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductInfo $productInfo)
+    public function destroy(ProductImages $productImages)
     {
         //
     }
