@@ -2,6 +2,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
     <meta charset="UTF-8">
     <title>
@@ -40,8 +41,8 @@
                 float: left;
             }
 
-            #subnavbar1 {
-            }
+            /* #subnavbar1 {
+            } */
             #placeholder {
                 top: 88px;
                 height: 78px;
@@ -84,9 +85,9 @@
         }
     </style>
     @yield('stylesheets')
-    <script src="/assets/js/vendor/jquery.slim.min.js"></script>
+    <script src="/assets/js/vendor/jquery.min.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.js"></script>
-    {{-- <script src="/js/cookies.js"></script> --}}
+    <script src="/js/server-session.js" ></script>
     @yield('header_javascripts')
 
 </head>
@@ -95,14 +96,8 @@
     @include('header.app')
     @yield('children')
     @include('footer.app')
-    {{-- <script src="/js/main.js"></script> --}}
-    {{-- <script src="/js/cart.js"></script> --}}
-    {{-- <script src="/js/promo.js"></script> --}}
-
+    <script src="/js/cart-manager.js" ></script>
     @yield('body_javascripts')
-    {{-- <script>
-        showCookiesPopin();
-    </script>    --}}
 </body>
 
 </html>
