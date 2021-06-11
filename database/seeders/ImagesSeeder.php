@@ -34,5 +34,30 @@ class ImagesSeeder extends Seeder
             'alt' => "Veste en jean cintrée manches longues femme bleue 4/4",
             'title' => "Veste en jean bleu cintrée manches longues pour femme, pas chère",
         ]);
+        Images::create([
+            'url' => "/assets/images/articles/robe-courte-eponge-jodie-reedition-1.webp",
+            'alt' => "Robe courte éponge Jodie Réédition 1/5",
+            'title' => "Robe éponge courte pas chère Jodie Réédition",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/robe-courte-eponge-jodie-reedition-2.webp",
+            'alt' => "Robe courte éponge Jodie Réédition 2/5",
+            'title' => "Robe éponge courte pas chère Jodie Réédition",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/robe-courte-eponge-jodie-reedition-3.webp",
+            'alt' => "Robe courte éponge Jodie Réédition 3/5",
+            'title' => "Robe éponge courte pas chère Jodie Réédition",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/robe-courte-eponge-jodie-reedition-4.webp",
+            'alt' => "Robe courte éponge Jodie Réédition 4/5",
+            'title' => "Robe éponge courte pas chère Jodie Réédition",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/robe-courte-eponge-jodie-reedition-5.webp",
+            'alt' => "Robe courte éponge Jodie Réédition 5/5",
+            'title' => "Robe éponge courte pas chère Jodie Réédition",
+        ]);
     }
 }
