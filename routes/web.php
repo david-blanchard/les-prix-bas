@@ -30,7 +30,12 @@ Route::get('/mode-femme', [ProductController::class, 'index'])->name('default');
 Route::get('/mode-femme/{slug}', [ProductController::class, 'show'])->name('product');
 Route::get('/recherche/{slug}', [ProductController::class, 'show'])->name('search');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/404', [HomeController::class, 'index'])->name('404');
 // Route::redirect('/', '/product', 301);
+
+Route::get('/404', function() {
+    return View('error.404');
+})->name('404');
 
 /**
  * Session routes
