@@ -60,7 +60,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      */
     public function retrieve(): array
     {
-        $result = self::makeEmptyCart();
+        $result = $this->makeEmptySessionObject();
 
         $result = session('cart') ?: $result;
         if (is_object($result)) {
@@ -71,9 +71,9 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
     /**
-     * Undocumented function
+     * Store the cart in session
      *
-     * @return array
+     * @return array an optimized session object
      */
     public function store(array $input): array
     {
@@ -87,9 +87,9 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
     /**
-     * Undocumented function
+     * Make the Cart object ready to dipslay
      *
-     * @return array
+     * @return array a simplified form of the Cart
      */
     public function prepareViewFields(): array
     {
@@ -103,6 +103,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      * This allows the compute the exact sum of a given product
      * accordingly to its actual quantity
      *
+     * @param array $sessioncData state of the cart in session
      * @param array $input data to update the cart with
      * @return Cart Cart object
      */
@@ -132,84 +133,6 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
 
-    /**
-     * Convert a Cart object to its session form
-     *
-     * @param Cart $cart
-     * @return array session data
-     */
-    public function makeSessionObject(): array
-    {
-        return [
-            "type" => $this->type(),
-            "content" => $this->items(),
-        ];
-    }
+    
 
-    public static function makeEmptyCart(): array
-    {
-        return [
-            'type' => 'Cart',
-            'content' => [
-                [
-                    'productId' => 0,
-                    'quantity' => 0,
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * Retrieve the cart state from the given session data
-     *
-     * @param array $sessioncData
-     * @return array a state of the cart in session
-     */
-    public static function retrieveCart(array $sessioncData): array
-    {
-        $result = self::makeEmptyCart();
-
-        $data = static::toObject($sessioncData);
-
-        if ($data->type === 'Cart') {
-            $result = session('cart') ?: $result;
-            if (is_object($result)) {
-                $result = self::toArray($result);
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Optimize the cart so that there's no duplicate key
-     * This allows the compute the exact sum of a given product
-     * accordingly to its actual quantity
-     *
-     * @param array $sessioncData state of the cart in session
-     * @param array $input data to update the cart with
-     * @return Cart Cart object
-     */
-    public static function reduceCart(array $sessioncData, array $input): Cart
-    {
-        $result = new Cart;
-
-        $sessionContent = $sessioncData['content'];
-        foreach ($sessionContent as $key => $item) {
-            if (is_array($item)) {
-                continue;
-            }
-            $result->add(["$key" => $item]);
-        }
-
-        $content = $input["type"] === "Cart" && isset($input["content"]) ?  $input["content"] : null;
-        if ($content !== null) {
-
-            foreach ($content as $item) {
-                $result->add(["{$item['productId']}" => $item['quantity']]);
-            }
-        }
-
-        return $result;
-    }
 }

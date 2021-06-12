@@ -61,8 +61,8 @@ class ProductPage {
         let addToCart = document.querySelector('button[id="add-to-cart"]');
 
         addToCart.onclick = () => {
-            const cartMan = new CartManager()
-            cartMan.storeCart(this.productId, this.quantity);
+            const cart = new Cart()
+            cart.store(this.productId, this.quantity);
         };
     }
 

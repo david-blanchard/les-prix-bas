@@ -1,4 +1,4 @@
-class CartManager {
+class Cart {
     constructor() {
         this.cartSumComponent = document.querySelector(
             'button[id="cart-cta"] span[id="cart-total"][name="price"]'
@@ -8,12 +8,12 @@ class CartManager {
         );
     }
 
-    updateCart(data) {
+    update(data) {
         this.cartCountComponent.innerText = data.quantity
         this.cartSumComponent.innerText = (data.total * 0.75).toFixed(2).replace('.', ',')
     }
 
-    retrieveCart() {
+    retrieve() {
         const context = this;
         const session = new ServerSession();
         session.retrieve(
@@ -21,12 +21,12 @@ class CartManager {
                 type: "Cart",
             },
             function (data) {
-                context.updateCart(data)
+                context.update(data)
             }
         )
     }
 
-    storeCart(productId, quantity) {
+    store(productId, quantity) {
         const context = this;
         const session = new ServerSession();
         session.store(
@@ -41,13 +41,13 @@ class CartManager {
             },
             function (data) {
                 console.log({data: data})
-                context.updateCart(data)
+                context.update(data)
             }
         )
     }
 }
 
 (() => {
-    const cartMan = new CartManager()
-    cartMan.retrieveCart()
+    const cart = new Cart()
+    cart.retrieve()
 })()
