@@ -7,6 +7,7 @@ use App\Library\Helpers\ImagesHelper;
 use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use Illuminate\Support\Str;
+
 class ProductController extends Controller
 {
     /**
@@ -37,18 +38,20 @@ class ProductController extends Controller
     public function show($slug)
     {
         $slug2 = Str::slug($slug);
-        $product = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug2 . '%')->get();
-        $attr = $product->first()->getAttributes();
-
-        if(count($attr)) {
-            $props = $this->attributesToProperties($attr);
-            $props = (object) $props;
-
-            return View('product', ['props' => $props]);
+        $products = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug2 . '%')->get();
+        $product = $products->first();
+        
+        if ($product === null) {
+            return View('error.404');
         }
 
-        return View('home');
-    } 
+        $attr = $product->getAttributes();
+
+        $props = $this->attributesToProperties($attr);
+        $props = (object) $props;
+
+        return View('product', ['props' => $props]);
+    }
 
     private function attributesToProperties(array $props): array
     {
@@ -63,11 +66,4 @@ class ProductController extends Controller
 
         return $props;
     }
-
-
-
-
-
-
-
 }
