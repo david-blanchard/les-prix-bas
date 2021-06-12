@@ -2,7 +2,6 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Accueil</a></li>
         <li class="breadcrumb-item"><a href="#">Mode femme</a></li>
-        <li class="breadcrumb-item"><a href="#">Vestes</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $props->name }}</li>
     </ol>
 </nav>

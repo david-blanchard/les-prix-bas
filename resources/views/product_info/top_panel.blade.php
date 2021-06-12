@@ -6,6 +6,7 @@
     $priceTag = MiscUtils::formatPrice($priceTag);
     $basePrice = MiscUtils::formatPrice($props->price);
 @endphp
+
 <div class="row">
     <div id="product" name="product-data" data-id="{{ $props->id }}"> {{ $props->name }} </div>
 </div>

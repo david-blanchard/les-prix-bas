@@ -20,11 +20,8 @@
             <ul class="navbar-nav navbar-dark mr-auto">
             </ul>
             @include('search.search_nav_bar')
-
             @include('user.user_nav_button')
         </div>
-        
- 
     </nav>
 
     <div id="placeholder" aria-label="placeholder">
@@ -61,4 +58,3 @@
         </nav>
     </div>
 </header>
-
