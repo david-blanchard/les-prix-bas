@@ -26,8 +26,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [ProductController::class, 'index'])->name('root');
-Route::get('/product', [ProductController::class, 'index'])->name('default');
-Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product');
+Route::get('/mode-femme', [ProductController::class, 'index'])->name('default');
+Route::get('/mode-femme/{slug}', [ProductController::class, 'show'])->name('product');
+Route::get('/recherche/{slug}', [ProductController::class, 'show'])->name('search');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::redirect('/', '/product', 301);
 

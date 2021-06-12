@@ -96,7 +96,8 @@
     @include('header.app')
     @yield('children')
     @include('footer.app')
-    <script src="/js/cart-manager.js" ></script>
+    <script src="/js/cart.js" ></script>
+    <script src="/js/search.js" ></script>
     @yield('body_javascripts')
 </body>
 
