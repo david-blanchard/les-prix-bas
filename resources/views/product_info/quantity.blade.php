@@ -1,7 +1,6 @@
-<div class="row">
-    <div class="col-sm">
-
-        <ul class="pagination justify-content-left">
+<div class="row justify-content-between mx-1 my-2">
+    <div>
+        <ul class="pagination">
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
                     Quantité
@@ -24,9 +23,10 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm">
-        <button id="add-to-cart" type="button" class="btn btn-primary" >
+    <div>
+        <button id="add-to-cart" type="button" class="btn btn-primary">
             Ajouter au panier
         </button>
     </div>
+
 </div>

@@ -11,12 +11,12 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        {{-- <h2 class='featurette-heading'>
-        </h2> --}}
         <p class='lead'>
+        </p>
+        <p class=''>
             {{ $props->description }}
         </p>
-        @if($props->featuresCaption !== null)
+        @if(count($props->features))
         <label htmlFor='features'>{{ $props->featuresCaption }} :</label>
         <ul id='features'>
             @foreach ($props->features as $item) 
