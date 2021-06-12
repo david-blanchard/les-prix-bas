@@ -25,23 +25,23 @@ class Cart extends AbstractSessionObject implements CartInterface
         $result = [];
 
         $total = 0.0;
-        $quantity = 0;
+        $numberOfProducts = 0;
 
         $items = $this->items();
 
-        foreach ($items as $key => $item) {
-            if (is_array($item)) {
+        foreach ($items as $productId => $quantity) {
+            if (is_array($quantity)) {
                 continue;
             }
-            $attr = ProductsHelper::getAttributesByProductId($key);
+            $attr = ProductsHelper::getAttributesByProductId($productId);
             $price = floatval($attr['price']);
 
-            $quantity += $item;
+            $numberOfProducts += $quantity;
             $total += $price * $quantity;
         }
 
         $result = [
-            "quantity" => $quantity,
+            "quantity" => $numberOfProducts,
             "total" => $total,
         ];
 

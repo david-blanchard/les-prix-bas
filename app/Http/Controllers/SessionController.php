@@ -17,14 +17,6 @@ class SessionController extends Controller
     public function index()
     {
         //
-
-        $cart = session('');
-
-        // Specifying a default value...
-        $value = session('key', 'default');
-    
-        // Store a piece of data in the session...
-        session(['key' => 'value']);
     }
 
     /**
