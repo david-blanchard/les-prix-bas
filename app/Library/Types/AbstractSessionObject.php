@@ -58,4 +58,35 @@ abstract class AbstractSessionObject implements SessionObjectInterface
     {
         $this->list = [];
     }
+
+    /**
+     * Convert a session object to its session form
+     *
+     * @return array session data
+     */
+    public function makeSessionObject(): array
+    {
+        return [
+            "type" => $this->type(),
+            "content" => $this->items(),
+        ];
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return array
+     */
+    public function makeEmptySessionObject(): array
+    {
+        return [
+            'type' => 'Cart',
+            'content' => [
+                [
+                    'productId' => 0,
+                    'quantity' => 0,
+                ]
+            ]
+        ];
+    }
 }
