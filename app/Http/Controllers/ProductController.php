@@ -27,20 +27,29 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productId = 1;
-        $attr = ProductsHelper::getAttributesByProductId($productId);
-        $props = $this->attributesToProperties($attr);
-        $props = (object) $props;
+        $props = ProductsHelper::getPropertiesFromCacheById(-1);
+        if ($props !== null) {
+            return View('product', $props);
+        }
 
-        return View('product', ['props' => $props]);
+        $attr = ProductsHelper::getAttributesByProductId();
+        $props = $this->attributesToProperties($attr);
+        ProductsHelper::putPropertiesInCacheById(-1, $props);
+        return View('product', $props);
     }
 
     public function show($slug)
     {
+
+        $props = ProductsHelper::getPropertiesFromCacheBySlug($slug);
+        if ($props !== null) {
+            return View('product', $props);
+        }
+
         $slug2 = Str::slug($slug);
         $products = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug2 . '%')->get();
         $product = $products->first();
-        
+
         if ($product === null) {
             return View('error.404');
         }
@@ -48,9 +57,11 @@ class ProductController extends Controller
         $attr = $product->getAttributes();
 
         $props = $this->attributesToProperties($attr);
-        $props = (object) $props;
 
-        return View('product', ['props' => $props]);
+        ProductsHelper::putPropertiesInCacheBySlug($slug, $props);
+
+        return View('product', $props);
+
     }
 
     private function attributesToProperties(array $props): array
@@ -66,4 +77,5 @@ class ProductController extends Controller
 
         return $props;
     }
+
 }

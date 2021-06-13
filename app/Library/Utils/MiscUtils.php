@@ -2,8 +2,12 @@
 
 namespace App\Library\Utils;
 
+use App\Library\Traits\ObjectUtilsTrait;
+
 final class MiscUtils
 {
+    use ObjectUtilsTrait;
+    
     public static function formatPrice(float|int $price): string
     {
 

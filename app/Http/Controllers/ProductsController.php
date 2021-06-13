@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\Helpers\BrandsHelper;
 use App\Models\Brands;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 class ProductsController extends Controller
 {
@@ -26,7 +26,7 @@ class ProductsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = DB::table('products')->paginate(20);
+        $products = DB::table('products')->paginate(env('PAGINATION'));
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
@@ -42,9 +42,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $brands = BrandsHelper::getAllFromCache();
+
         return view('admin.products.create', [
-            'brands' => Brands::all()
+            'brands' => $brands,
         ]);
     }
 
@@ -56,8 +57,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd($request->all());
         Products::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -88,10 +87,10 @@ class ProductsController extends Controller
      */
     public function edit(Products $product)
     {
-        //
+        $brands = BrandsHelper::getAllFromCache();
         return view('admin.products.edit', [
             'product' => $product,
-            'brands' => Brands::all(),
+            'brands' => $brands,
         ]);
     }
 
@@ -104,7 +103,6 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $product)
     {
-        //
         $product->name = $request->input("name");
         $product->description = $request->input("description");
         $product->more_infos = $request->input("more_infos");
