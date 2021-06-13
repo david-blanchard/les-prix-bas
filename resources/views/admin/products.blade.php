@@ -16,7 +16,7 @@ Les prix bas !
 <div class="container">
     <h2 class="text-center my-5">
         Produits
-        <a href="{{ route('products_man.create') }}" class="btn btn-primary" alt="Créer" title="Créer">
+        <a href="{{ route('products_man.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </h2>
@@ -37,7 +37,7 @@ Les prix bas !
             @foreach ($products as $item)
             <tr>
                 <th>
-                    <a href="{{ route('products_man.edit', $item->id) }}" class="btn btn-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
+                    <a href="{{ route('products_man.edit', $item->id) }}" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
                         <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
                 </th>
@@ -71,7 +71,7 @@ Les prix bas !
                     <form action="{{ route('products_man.delete', $item->id) }}" method="POST">
                     @csrf
                     @method("DELETE")
-                        <button type="submit" class="btn btn-danger" >
+                        <button type="submit" class="btn btn-outline-danger" >
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </form>

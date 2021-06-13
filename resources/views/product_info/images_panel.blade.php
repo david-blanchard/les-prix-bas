@@ -37,7 +37,7 @@
 
 @if($isAdmin)
 <div class="row bg-cyan justify-content-center my-3 mx-3">
-    <a href="{{ route('product_images_man.create', $id) }}" class="btn btn-danger">
+    <a href="{{ route('product_images_man.create', $id) }}" class="btn btn-outline-danger">
         Ajouter des images au produit
     </a>
 </div>

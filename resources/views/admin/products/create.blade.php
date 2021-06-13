@@ -57,7 +57,7 @@ Les prix bas !
         </div>
         <div class="col-12">
             <div class="d-flex justify-content-center mb-5">
-                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-outline-primary">Valider</button>
             </div>
         </div>
     </form>

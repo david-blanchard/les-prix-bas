@@ -24,7 +24,7 @@
         </ul>
     </div>
     <div>
-        <button id="add-to-cart" type="button" class="btn btn-primary">
+        <button id="add-to-cart" type="button" class="btn btn-outline-primary">
             Ajouter au panier
         </button>
     </div>

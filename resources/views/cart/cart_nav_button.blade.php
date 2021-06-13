@@ -8,7 +8,7 @@
     $quantity = $fields['quantity'];
 @endphp
 
-<button id="cart-cta" class="btn btn-success my-2 my-sm-0 ml-3" href="javascript:void(0)">
+<button id="cart-cta" class="btn btn-outline-success my-2 my-sm-0 ml-3" href="javascript:void(0)">
     <i class="fa fa-shopping-cart"></i>
     <span id="cart-count" name="quantity" class="badge badge-light sl-1">{{ $quantity }}</span>
     <span id="cart-total" name="price" class="badge badge-light sl-1">{{ $total }}</span>

@@ -13,7 +13,7 @@ Les prix bas !
 <div class="container">
     <h2 class="text-center my-5">
         Marques
-        <a href="{{ route('brands_man.create') }}" class="btn btn-primary" alt="Créer" title="Créer">
+        <a href="{{ route('brands_man.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </h2>
@@ -29,13 +29,13 @@ Les prix bas !
         @foreach ($brands as $item)
             <tr>
                 <th>
-                    <a href="javascript:void(0)" class="btn btn-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
+                    <a href="javascript:void(0)" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
                         <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
                 </th>
                 <td>{{ $item->name }}</td>
                 <td>
-                    <a href="javascript:void(0)" class="btn btn-danger" alt="Supprimer" title="Supprimer">
+                    <a href="javascript:void(0)" class="btn btn-outline-danger" alt="Supprimer" title="Supprimer">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>

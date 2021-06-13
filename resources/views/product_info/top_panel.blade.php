@@ -25,7 +25,7 @@ $basePrice = MiscUtils::formatPrice($price);
         <div id="stroke-price-tag" name="unit-price" class='badge badge-light'><del> {{ $basePrice }}&nbsp; <i class="fa fa-euro"></i> </del></div>
         @endif
         <div id="price-tag" name="unit-price">
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-outline-success">
                 <span>
                     {{ $priceTag }}&nbsp;<i class="fa fa-euro"></i>
                 </span>
