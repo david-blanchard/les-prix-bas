@@ -1,5 +1,5 @@
 @php 
-    $hasNoImage = !isset($props->images[0]);
+    $hasNoImage = !isset($images[0]);
     $isAdmin = \App\Http\Middleware\Admin::userIsAdmin();
 
     if($hasNoImage) {
@@ -9,11 +9,11 @@
             $image->alt = "pas d'image disponible";
             $image->title = "pas d'image disponible";
 
-            array_push($props->images, $image);
+            array_push($images, $image);
         }
     }
 
-    $image = $props->images[0];
+    $image = $images[0];
     $size = 500;
 @endphp
 
@@ -25,7 +25,7 @@
     $size = 50;
 @endphp
 
-@foreach($props->images as $image)
+@foreach($images as $image)
 @if ($loop->first)
 <button class="btn focus" name="btn-picto" focusable="true" data-toggle="button" aria-pressed="true" >
 @else
@@ -37,7 +37,7 @@
 
 @if($isAdmin)
 <div class="row bg-cyan justify-content-center my-3 mx-3">
-    <a href="{{ route('product_images_man.create', $props->id) }}" class="btn btn-danger">
+    <a href="{{ route('product_images_man.create', $id) }}" class="btn btn-danger">
         Ajouter des images au produit
     </a>
 </div>

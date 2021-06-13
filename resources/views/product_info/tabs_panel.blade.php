@@ -14,12 +14,12 @@
         <p class='lead'>
         </p>
         <p class=''>
-            {{ $props->description }}
+            {{ $description }}
         </p>
-        @if(count($props->features))
-        <label htmlFor='features'>{{ $props->featuresCaption }} :</label>
+        @if(count($features))
+        <label htmlFor='features'>{{ $featuresCaption }} :</label>
         <ul id='features'>
-            @foreach ($props->features as $item) 
+            @foreach ($features as $item) 
                 <li> {{ $item }} </li>     
             @endforeach
         </ul>

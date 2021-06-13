@@ -8,6 +8,9 @@
     <title>
         @yield('title')
     </title>
+    
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/turbinado-light.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-regular.woff2" crossorigin>
 
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/assets/dist/css/bootstrap.css" />

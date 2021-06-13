@@ -1,23 +1,23 @@
 @php
 use App\Library\Utils\MiscUtils;
-$hasDiscount = $props->discount > 0;
-$priceTag = $hasDiscount ? $props->discount : $props->price;
+$hasDiscount = $discount > 0;
+$priceTag = $hasDiscount ? $discount : $price;
 
 $priceTag = MiscUtils::formatPrice($priceTag);
-$basePrice = MiscUtils::formatPrice($props->price);
+$basePrice = MiscUtils::formatPrice($price);
 @endphp
 
 <div class="row mx-1">
-    <div id="product" name="product-data" data-id="{{ $props->id }}">
+    <div id="product" name="product-data" data-id="{{ $id }}">
         <h4 class='featurette-heading'>
-            {{ $props->name }}
+            {{ $name }}
         </h4>
     </div>
 </div>
 <div class="row justify-content-between mx-1">
     <div> 
     <h5 class='featurette-heading'>
-    {{ $props->brand }} 
+    {{ $brand }} 
     </h5>
     </div>
     <div>
