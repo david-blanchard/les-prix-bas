@@ -18,5 +18,11 @@ class BrandsSeeder extends Seeder
         Brands::create([
             "name" => "Venca"
         ]);
+        Brands::create([
+            "name" => "Jodie"
+        ]);
+        Brands::create([
+            "name" => "Le Vestiaire"
+        ]);
     }
 }

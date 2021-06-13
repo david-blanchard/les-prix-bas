@@ -59,5 +59,20 @@ class ImagesSeeder extends Seeder
             'alt' => "Robe courte éponge Jodie Réédition 5/5",
             'title' => "Robe éponge courte pas chère Jodie Réédition",
         ]);
+        Images::create([
+            'url' => "/assets/images/articles/tee-shirt-uni-a-bretelles-maille-elastique-femme-noir-1.webp",
+            'alt' => "T-shirt uni à bretelles noir maille élastique pour femme 1/3",
+            'title' => "T-shirt uni à bretelles noir pas cher maille élastique ",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/tee-shirt-uni-a-bretelles-maille-elastique-femme-noir-2.webp",
+            'alt' => "T-shirt uni à bretelles noir maille élastique pour femme 2/3",
+            'title' => "T-shirt uni à bretelles noir pas cher maille élastique ",
+        ]);
+        Images::create([
+            'url' => "/assets/images/articles/tee-shirt-uni-a-bretelles-maille-elastique-femme-noir-3.webp",
+            'alt' => "T-shirt uni à bretelles noir maille élastique pour femme 3/3",
+            'title' => "T-shirt uni à bretelles noir pas cher maille élastique ",
+        ]);
     }
 }
