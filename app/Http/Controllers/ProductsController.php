@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Library\Helpers\BrandsHelper;
-use App\Models\Brands;
+use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -109,6 +109,7 @@ class ProductsController extends Controller
         $product->price = $request->input("price");
         $product->brand = $request->input("brand");
         $product->save();
+        ProductsHelper::deletePropertiesFromCacheById($product->id);
 
         return redirect()->route('products_man')->with('success', "Le produit a bien été mis à jour");
 

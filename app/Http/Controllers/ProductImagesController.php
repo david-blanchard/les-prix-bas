@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Library\Helpers\BrandsHelper;
 use App\Library\Helpers\ImagesHelper;
+use App\Library\Helpers\ProductsHelper;
 use App\Models\Images;
 use App\Models\Product;
 use App\Models\ProductImages;
@@ -21,7 +22,6 @@ class ProductImagesController extends Controller
      */
     public function index()
     {
-        //
         $user = Auth::user();
         $products = DB::table('products')->paginate(20);
 
@@ -67,6 +67,7 @@ class ProductImagesController extends Controller
             'product' => $productId,
             'image' => $request->input('image'),
         ]);
+        ProductsHelper::deletePropertiesFromCacheById($productId);
 
         return redirect()->route('product_images_man.create', ['productId' => $productId]);
     }

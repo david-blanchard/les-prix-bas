@@ -57,33 +57,71 @@ class ProductsHelper
         return $result;
     }
 
+    /**
+     * Remove the product page properties from the cache by Products object
+     *
+     * @param Products $product
+     * @return void
+     */
+    public static function deletePropertiesFromCache(Products $product) : void
+    {
+        self::deletePropertiesFromCacheById($product->id);
+    }
+
+    /**
+     * Remove the product page properties from the cache by ID
+     *
+     * @param integer $productId ID of the product
+     * @return void
+     */
+    public static function deletePropertiesFromCacheById(int $productId) : void
+    {
+        if(Cache::has("product$productId")) {
+            Cache::pull("product$productId");
+        }
+    }
+
+    /**
+     * Retrieve the product page properties from the cache by slug
+     *
+     * @param string $slug Free form of the product name
+     * @return array|null $properties Values to be set in product page view
+     */
     public static function getPropertiesFromCacheBySlug(string $slug): ?array
     {
         $result = null;
 
         $productId = Cache::has("product$slug") ? Cache::get("product$slug") : null;
         if($productId !== null) {
-
             $result = ProductsHelper::getPropertiesFromCacheById($productId);
-
-            // dd(['slug' => $slug, 'props' => $result]);
-
         }
 
         return $result;
     }
 
+    /**
+     * Store the product page properties in cache by slug
+     *
+     * @param string $slug Free form of the product name
+     * @param array $properties Values to be set in product page view
+     * @return void
+     */
     public static function putPropertiesInCacheBySlug(string $slug, array $properties): void
     {
         if(!Cache::has("product$slug"))
         {
-
             $id = $properties['id'];
             Cache::put("product$slug", $id);
             ProductsHelper::putPropertiesInCacheById($id, $properties);
         }
     }
     
+    /**
+     * Retrieve the product page properties from the cache by ID
+     *
+     * @param integer $id ID of the product
+     * @return array|null Values to be set in product page view
+     */
     public static function getPropertiesFromCacheById(int $id): ?array
     {
         $product = Cache::has("product$id") ? Cache::get("product$id") : null;
@@ -91,6 +129,13 @@ class ProductsHelper
         return $product;
     }
 
+    /**
+     * Store the product page properties in cache by ID
+     *
+     * @param integer $id ID of the product
+     * @param array $properties Values to be set in product page view
+     * @return void
+     */
     public static function putPropertiesInCacheById(int $id, array $properties): void
     {
         if(!Cache::has("product$id"))
