@@ -1,10 +1,10 @@
 class Cart {
     constructor() {
         this.cartSumComponent = document.querySelector(
-            'button[id="cart-cta"] span[id="cart-total"][name="price"]'
+            'span[id="cart-cta"] span[id="cart-total"][name="price"]'
         );
         this.cartCountComponent = document.querySelector(
-            'button[id="cart-cta"] span[id="cart-count"][name="quantity"]'
+            'span[id="cart-cta"] span[id="cart-count"][name="quantity"]'
         );
     }
 
