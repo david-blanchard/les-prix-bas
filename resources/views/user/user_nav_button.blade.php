@@ -4,7 +4,8 @@
     $login = "Connexion"; // __('Login')
     $register = "Pas encore inscrit ?"; // __('Register')
     $logout = "Déconnexion"; // __('Logout')
-    $isAdmin = \App\Http\Middleware\Admin::userIsAdmin();
+    $isAdmin = \App\Library\Helpers\UserHelper::isAdmin();
+
 @endphp
 
 <button type="button" class="btn btn-secondary dropdown-toggle my-2 my-sm-0 ml-3"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

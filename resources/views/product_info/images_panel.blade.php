@@ -1,6 +1,6 @@
 @php 
     $hasNoImage = !isset($images[0]);
-    $isAdmin = \App\Http\Middleware\Admin::userIsAdmin();
+    $isAdmin = \App\Library\Helpers\UserHelper::isAdmin();
 
     if($hasNoImage) {
         for($i = 0; $i < 4; $i++) {
