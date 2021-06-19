@@ -26,5 +26,9 @@ class DatabaseSeeder extends Seeder
         $products->run();
         $productsImages = new ProductImagesSeeder;
         $productsImages->run();
+        $campaigns = new CampaignsSeeder;
+        $campaigns->run();
+        $campaignProducts = new CampaignProductsSeeder;
+        $campaignProducts->run();
     }
 }
