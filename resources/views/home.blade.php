@@ -4,7 +4,6 @@ Les prix bas !
 @stop
 
 @section('stylesheets')
-    <link rel="stylesheet" href="/css/index.css" />
 @stop
 
 @section('head_javascripts')

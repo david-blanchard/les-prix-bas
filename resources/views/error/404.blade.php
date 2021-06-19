@@ -4,7 +4,6 @@ Les prix bas !
 @stop
 
 @section('stylesheets')
-    <link rel="stylesheet" href="/css/index.css" />
 @stop
 
 @section('head_javascripts')
@@ -21,7 +20,7 @@ Les prix bas !
         <div class="row my-5 mx-3 justify-content-center">
 
         <h2>
-        Nous n'avons pas trouvé ce produit
+        Malheureusement n'avons pas ce produit en magasin
         </h2>
     </div>
 </div>
