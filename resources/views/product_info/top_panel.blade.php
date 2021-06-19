@@ -26,7 +26,7 @@ $basePrice = MiscUtils::formatPrice($price);
                 <del>{{ $basePrice }} <i class="fa fa-euro"></i></del>
         </h6>
         @endif
-        <h3 id="price-tag" name="unit-price" class="btn-outline-success disabled">
+        <h3 id="price-tag" name="unit-price" data-discount-rate="{{ $discountRate }}" class="btn-outline-success disabled">
             {{ $priceTag }}&nbsp;<i class="fa fa-euro"></i>
         </h3>
     </div>

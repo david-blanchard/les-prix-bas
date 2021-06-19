@@ -33,8 +33,9 @@ class ProductController extends Controller
         }
 
         $attr = ProductsHelper::getAttributesByProductId();
-        $props = $this->attributesToProperties($attr);
+        $props = ProductsHelper::attributesToProperties($attr);
         ProductsHelper::putPropertiesInCacheById(-1, $props);
+
         return View('product', $props);
     }
 
@@ -56,26 +57,12 @@ class ProductController extends Controller
 
         $attr = $product->getAttributes();
 
-        $props = $this->attributesToProperties($attr);
+        $props = ProductsHelper::attributesToProperties($attr);
 
         ProductsHelper::putPropertiesInCacheBySlug($slug, $props);
 
         return View('product', $props);
 
-    }
-
-    private function attributesToProperties(array $props): array
-    {
-        $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
-        $props['discount'] = ProductsHelper::computeDiscount($props['price'], 25);
-
-        $props['featuresCaption'] = 'Information complémentaires';
-        $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
-
-        $images = ImagesHelper::getImagesByProductId($props['id']);
-        $props['images'] = $images;
-
-        return $props;
     }
 
 }

@@ -109,6 +109,9 @@ class ProductsController extends Controller
         $product->price = $request->input("price");
         $product->brand = $request->input("brand");
         $product->save();
+
+        // Delete product properties from the cache
+        // since we just updated them
         ProductsHelper::deletePropertiesFromCacheById($product->id);
 
         return redirect()->route('products_man')->with('success', "Le produit a bien été mis à jour");

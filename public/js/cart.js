@@ -6,11 +6,15 @@ class Cart {
         this.cartCountComponent = document.querySelector(
             'span[id="cart-cta"] span[id="cart-count"][name="quantity"]'
         );
+
+        this.priceComponent = document.querySelector(
+            'h3[id="price-tag"][name="unit-price"]'
+        );
     }
 
     update(data) {
         this.cartCountComponent.innerText = data.quantity
-        this.cartSumComponent.innerText = (data.total * 0.75).toFixed(2).replace('.', ',')
+        this.cartSumComponent.innerText = data.total
     }
 
     retrieve() {
@@ -40,7 +44,6 @@ class Cart {
                 ],
             },
             function (data) {
-                console.log({data: data})
                 context.update(data)
             }
         )

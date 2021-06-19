@@ -34,7 +34,8 @@ class Cart extends AbstractSessionObject implements CartInterface
                 continue;
             }
             $attr = ProductsHelper::getAttributesByProductId($productId);
-            $price = floatval($attr['price']);
+            $props = ProductsHelper::attributesToProperties($attr);
+            $price = $props['discount'] ?: floatval($props['price']);
 
             $numberOfProducts += $quantity;
             $total += $price * $quantity;

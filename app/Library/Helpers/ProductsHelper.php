@@ -30,6 +30,28 @@ class ProductsHelper
     }
 
     /**
+     * Transform Product attributes in properties usable in views
+     *
+     * @param array $props
+     * @return array
+     */
+    public static function attributesToProperties(array $props): array
+    {
+        $discount = ProductsHelper::getProductDiscountById($props['id']);
+        $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
+        $props['discountRate'] = $discount;
+        $props['discount'] = ProductsHelper::computeDiscount($props['price'], $discount);
+
+        $props['featuresCaption'] = 'Information complémentaires';
+        $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
+
+        $images = ImagesHelper::getImagesByProductId($props['id']);
+        $props['images'] = $images;
+
+        return $props;
+    }
+
+    /**
      * Used to split the 'MoreInfo' field into an array of strings
      *
      * @param string $phrase
@@ -39,6 +61,24 @@ class ProductsHelper
     {
         $result = [];
         $result = explode(';', $phrase);
+
+        return $result;
+    }
+
+    public static function getProductDiscountById(int $productId): int
+    {
+        $result = 0.0;
+
+        $today = date('Y-m-d');
+
+        $discounts = DB::table('campaigns')
+        ->join('campaign_products', function ($join) use ($today, $productId) {
+            $join->on('campaigns.id', '=', 'campaign_products.campaign')
+                 ->where('campaign_products.product', '=', $productId)
+                 ->whereRaw('? between `campaigns`.`start` and `campaigns`.`end`', ["$today"]);
+        })->get();
+
+        $result = $discounts = count($discounts->toArray()) ? $discounts[0]->discount : 0;
 
         return $result;
     }
