@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class RouteTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     /**
      * Test Mode Femme page
@@ -79,7 +79,7 @@ class RouteTest extends TestCase
      */
     public function test_adminUiRequestAsAdmin()
     {
-        // $this->createAdmin();
+        $this->createAdmin();
 
         $admin = Auth::loginUsingId(1);
         $this->actingAs($admin);
@@ -101,6 +101,16 @@ class RouteTest extends TestCase
         $this->actingAs($admin);
         $response = $this->get('/admin/products/1/edit');
         $response->assertStatus(200);
+    }
+
+    public function createAdmin()
+    {
+        User::create([
+            'email' => 'admin@lpb.fr',
+            'name' => 'Administrator',
+            'password' => Hash::make('demo'),
+            'role' => User::ADMIN_ROLE,
+        ]);
     }
 
 }
