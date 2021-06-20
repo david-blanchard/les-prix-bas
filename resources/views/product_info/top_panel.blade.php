@@ -1,6 +1,6 @@
 @php
 use App\Library\Utils\MiscUtils;
-$hasDiscount = $discount > 0;
+$hasDiscount = $discount > 0 && $discount < $price;
 $priceTag = $hasDiscount ? $discount : $price;
 
 $priceTag = MiscUtils::formatPrice($priceTag);
