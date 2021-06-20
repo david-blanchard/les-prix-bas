@@ -39,7 +39,11 @@ php artisan config:cache --env=testing
 ### 2.1 - Migration des données
 
 
-Dans le fichier .env.testing, modifiez les accès root pour que les migrations en base s'effectuent sans problème.
+Dans le fichier .env.testing, modifiez les accès **MyS** pour que les migrations en base s'effectuent sans problème.
+
+> `DB_USERNAME=`**root**
+
+> `DB_PASSWORD=`**demo**
 
 Créez la base de données de test
 
@@ -107,11 +111,17 @@ cp .env.testing .env
 Editez le fichier .env pour changer quelques valeurs qui caractérisent l'environnement de test : 
 
 
-> `APP_ENV=`**test**`                  =>     APP_ENV=`**local**
+> `<< APP_ENV=`**test**
 
-> `DB_CONNECTION=mysql`**_testing**`   =>     DB_CONNECTION=mysql`
+> `>> APP_ENV=`**local**
 
-> `DB_DATABASE=lesprixbas`**_test**`   =>     DB_DATABASE=lesprixbas`
+> `<< DB_CONNECTION=mysql`**_testing**
+
+> `>> DB_CONNECTION=mysql`
+
+> `<< DB_DATABASE=lesprixbas`**_test**
+
+> `>> DB_DATABASE=lesprixbas`
 
 
 Quittez le mode test
