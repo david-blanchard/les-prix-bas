@@ -7,8 +7,6 @@ use Tests\TestCase;
 
 class CampaignOneTest extends TestCase
 {
-    // use RefreshDatabase;
-
     /**
      * Test if a campaign with ID 1 exists
      *
@@ -22,7 +20,7 @@ class CampaignOneTest extends TestCase
     }
 
     /**
-     * Undocumented function
+     * Test if spring discount campaign is 15 percent off
      *
      * @return void
      */
