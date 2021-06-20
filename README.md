@@ -51,6 +51,14 @@ Créez la base de données de test
 php artisan db:create lesprixbas_test
 ```
 
+Si la creation par script pose problème, pensez à redémarrer **MySQL** et vider le cache applicatif
+
+```zsh
+php artisan config:clear
+php artisan cache:clear
+php artisan config:cache --env=testing
+```
+
 Créez la structure de la base de données de test
 
 ```zsh
