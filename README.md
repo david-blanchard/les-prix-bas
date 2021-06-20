@@ -1,9 +1,9 @@
-
-# Installation de LesPrixBas
-
+# LesPrixBas
 
 
-## Pré-requis
+## Installation
+
+### Pré-requis
 
 
 Vous avez un serveur de base de données MySQL fonctionnel et accessible sur localhost.
@@ -12,79 +12,101 @@ Vous avez PHP en version 8 minimum ainsi que Composer.
 
 Votre environnement de développement est sous Linux, MacOS ou Windows WSL 2.
 
+Clonez le repo :
+
+```bash
+git clone https://github.com/david-blanchard/les-prix-bas.git
+```
+
 Installez les dépendances :
 
-    $ composer u
+```bash
+$ composer u
+```
 
 Corrigez les erreurs s'il y en a.
 
 
-# Phase de test
+## Phase de test
 
 
 Passez en mode test
 
-    $ php artisan config:cache --env=testing
+```bash
+$ php artisan config:cache --env=testing
+```
 
-## Migration des données
+### Migration des données
 
 
 Dans le fichier .env.testing, modifiez les accès root pour que les migrations en base s'effectuent sans problème.
 
 Créez la base de données de test
 
-    $ php artisan db:create lesprixbas_test
+```bash
+$ php artisan db:create lesprixbas_test
+```
 
 Créez la structure de la base de données de test
 
-    $ php artisan migrate
+```bash
+$ php artisan migrate
+```
 
 Injectez les données de test
 
-    $ php artisan db:seed
-
-## Test
-
+```bash
+$ php artisan db:seed
+```
+### Test
 
 Lancez le test
 
-    $ php artisan test
+```bash
+$ php artisan test
+```
 
 Tout doit être vert.
 
-
-# Mode developer
-
+## Mode developer
 
 Créez un fichier d'environnement dev avec le fichier test
 
-    $ cp .env.testing .env
+```bash
+$ cp .env.testing .env
+```
 
 Editez le fichier .env pour changer APP_ENV=test en APP_ENV=local et supprimez les autres occurrences de test et testing
 
 Quittez le mode test
 
-    $ php artisan config:cache
+```bash
+$ php artisan config:cache
+```
 
-
-## Migration des données
+### Migration des données
 
 
 Créez la base de données lesprixbas
 
-    $ php artisan db:create lesprixbas
+```bash
+$ php artisan db:create lesprixbas
+```
 
 Créez la structure de la base de données
 
-    $ php artisan migrate
+```bash
+$ php artisan migrate
+```
 
 Injectez les données
 
-    $ php artisan db:seed
+```bash
+$ php artisan db:seed
+```
 
+### **Lancement du projet**
 
-## Lancement du projet
-
-
-    $ php artisan serve
-
+```bash
+$ php artisan serve
+```
