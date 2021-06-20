@@ -21,7 +21,7 @@ git clone https://github.com/david-blanchard/les-prix-bas.git
 Installez les dépendances :
 
 ```bash
-$ composer u
+omposer u
 ```
 
 Corrigez les erreurs s'il y en a.
@@ -33,7 +33,7 @@ Corrigez les erreurs s'il y en a.
 Passez en mode test
 
 ```bash
-$ php artisan config:cache --env=testing
+php artisan config:cache --env=testing
 ```
 
 ### Migration des données
@@ -44,26 +44,26 @@ Dans le fichier .env.testing, modifiez les accès root pour que les migrations e
 Créez la base de données de test
 
 ```bash
-$ php artisan db:create lesprixbas_test
+php artisan db:create lesprixbas_test
 ```
 
 Créez la structure de la base de données de test
 
 ```bash
-$ php artisan migrate
+php artisan migrate
 ```
 
 Injectez les données de test
 
 ```bash
-$ php artisan db:seed
+php artisan db:seed
 ```
 ### Test
 
 Lancez le test
 
 ```bash
-$ php artisan test
+php artisan test
 ```
 
 Tout doit être vert.
@@ -81,7 +81,7 @@ Editez le fichier .env pour changer APP_ENV=test en APP_ENV=local et supprimez l
 Quittez le mode test
 
 ```bash
-$ php artisan config:cache
+php artisan config:cache
 ```
 
 ### Migration des données
@@ -90,23 +90,23 @@ $ php artisan config:cache
 Créez la base de données lesprixbas
 
 ```bash
-$ php artisan db:create lesprixbas
+php artisan db:create lesprixbas
 ```
 
 Créez la structure de la base de données
 
 ```bash
-$ php artisan migrate
+php artisan migrate
 ```
 
 Injectez les données
 
 ```bash
-$ php artisan db:seed
+php artisan db:seed
 ```
 
 ### **Lancement du projet**
 
 ```bash
-$ php artisan serve
+php artisan serve
 ```
