@@ -1,16 +1,16 @@
 # LesPrixBas
 
 
-## Installation
+## 1 - Installation
 
-### Pré-requis
+### 1.1 - Pré-requis
 
 
-Vous avez un serveur de base de données MySQL fonctionnel et accessible sur localhost.
+Vous avez un serveur de base de données **MySQL** fonctionnel et accessible sur localhost.
 
-Vous avez PHP en version 8 minimum ainsi que Composer.
+Vous avez **PHP** en version **8** minimum ainsi que **Composer**.
 
-Votre environnement de développement est sous Linux, MacOS ou Windows WSL 2.
+Votre environnement de développement est sous **Linux**, **MacOS** ou **Windows WSL 2**.
 
 Clonez le repo :
 
@@ -21,13 +21,13 @@ git clone https://github.com/david-blanchard/les-prix-bas.git
 Installez les dépendances :
 
 ```bash
-omposer u
+composer u
 ```
 
 Corrigez les erreurs s'il y en a.
 
 
-## Phase de test
+## 2 - Phase de test
 
 
 Passez en mode test
@@ -36,7 +36,7 @@ Passez en mode test
 php artisan config:cache --env=testing
 ```
 
-### Migration des données
+### 2.1 - Migration des données
 
 
 Dans le fichier .env.testing, modifiez les accès root pour que les migrations en base s'effectuent sans problème.
@@ -58,17 +58,45 @@ Injectez les données de test
 ```bash
 php artisan db:seed
 ```
-### Test
+### 2.2 - Test
 
 Lancez le test
 
 ```bash
 php artisan test
 ```
+Résultat attendu :
 
-Tout doit être vert.
+```raw
+PASS  Tests\Unit\CampaignOneTest
+✓ campaign one exists
+✓ campaign one discount rate is 15 percent
 
-## Mode developer
+PASS  Tests\Unit\ProductOneTest
+✓ product one exists
+✓ product one is veste en jean
+✓ product one is not robe
+✓ product one price is 38 euros
+
+PASS  Tests\Feature\ModelTest
+✓ registration is valid
+✓ registration is invalid
+
+PASS  Tests\Feature\RouteTest
+✓ mode femme page
+✓ mode femme page with valid slug veste one of three
+✓ mode femme page with valid slug robe two of three
+✓ mode femme page with valid slug maille three of three
+✓ mode femme page with invalid slug pantalon
+✓ admin ui redirect to login as guest
+✓ admin ui request as admin
+✓ admin ui edit product one
+
+Tests:  16 passed
+Time:   1.39s
+```
+
+## 3 - Mode developer
 
 Créez un fichier d'environnement dev avec le fichier test
 
@@ -84,7 +112,7 @@ Quittez le mode test
 php artisan config:cache
 ```
 
-### Migration des données
+### 3.1 - Migration des données
 
 
 Créez la base de données lesprixbas
@@ -105,7 +133,7 @@ Injectez les données
 php artisan db:seed
 ```
 
-### **Lancement du projet**
+### 3.2 - Lancement du projet
 
 ```bash
 php artisan serve
