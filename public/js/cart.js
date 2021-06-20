@@ -14,7 +14,7 @@ class Cart {
 
     update(data) {
         this.cartCountComponent.innerText = data.quantity
-        this.cartSumComponent.innerText = data.total
+        this.cartSumComponent.innerText = data.total.toFixed(2).replace('.', ',')
     }
 
     retrieve() {
