@@ -12,6 +12,9 @@ final class MiscUtils
     {
 
         $result = str_replace(".", ",", "" . round($price, 2) . "");
+        if($result === "0") {
+            $result = "0,00";
+        }
 
         return $result;
     }
