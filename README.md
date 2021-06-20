@@ -14,13 +14,13 @@ Votre environnement de développement est sous **Linux**, **MacOS** ou **Windows
 
 Clonez le repo :
 
-```bash
+```zsh
 git clone https://github.com/david-blanchard/les-prix-bas.git
 ```
 
 Installez les dépendances :
 
-```bash
+```zsh
 composer u
 ```
 
@@ -32,14 +32,14 @@ Corrigez les erreurs s'il y en a.
 
 Passez en mode test
 
-```bash
+```zsh
 php artisan config:cache --env=testing
 ```
 
 ### 2.1 - Migration des données
 
 
-Dans le fichier .env.testing, modifiez les accès **MyS** pour que les migrations en base s'effectuent sans problème.
+Dans le fichier .env.testing, modifiez les accès **MySQL** pour que les migrations en base s'effectuent sans problème.
 
 > `DB_USERNAME=`**root**
 
@@ -47,54 +47,54 @@ Dans le fichier .env.testing, modifiez les accès **MyS** pour que les migration
 
 Créez la base de données de test
 
-```bash
+```zsh
 php artisan db:create lesprixbas_test
 ```
 
 Créez la structure de la base de données de test
 
-```bash
+```zsh
 php artisan migrate
 ```
 
 Injectez les données de test
 
-```bash
+```zsh
 php artisan db:seed
 ```
 ### 2.2 - Test
 
 Lancez le test
 
-```bash
+```zsh
 php artisan test
 ```
 Résultat attendu :
 
-```raw
+```zsh
 PASS  Tests\Unit\CampaignOneTest
-✓ campaign one exists
-✓ campaign one discount rate is 15 percent
+✔️ campaign one exists
+✔️ campaign one discount rate is 15 percent
 
 PASS  Tests\Unit\ProductOneTest
-✓ product one exists
-✓ product one is veste en jean
-✓ product one is not robe
-✓ product one price is 38 euros
+✔️ product one exists
+✔️ product one is veste en jean
+✔️ product one is not robe
+✔️ product one price is 38 euros
 
 PASS  Tests\Feature\ModelTest
-✓ registration is valid
-✓ registration is invalid
+✔️ registration is valid
+✔️ registration is invalid
 
 PASS  Tests\Feature\RouteTest
-✓ mode femme page
-✓ mode femme page with valid slug veste one of three
-✓ mode femme page with valid slug robe two of three
-✓ mode femme page with valid slug maille three of three
-✓ mode femme page with invalid slug pantalon
-✓ admin ui redirect to login as guest
-✓ admin ui request as admin
-✓ admin ui edit product one
+✔️ mode femme page
+✔️ mode femme page with valid slug veste one of three
+✔️ mode femme page with valid slug robe two of three
+✔️ mode femme page with valid slug maille three of three
+✔️ mode femme page with invalid slug pantalon
+✔️ admin ui redirect to login as guest
+✔️ admin ui request as admin
+✔️ admin ui edit product one
 
 Tests:  16 passed
 Time:   1.39s
@@ -104,7 +104,7 @@ Time:   1.39s
 
 Créez un fichier d'environnement dev avec le fichier test
 
-```bash
+```zsh
 cp .env.testing .env
 ```
 
@@ -126,7 +126,7 @@ Editez le fichier .env pour changer quelques valeurs qui caractérisent l'enviro
 
 Quittez le mode test
 
-```bash
+```zsh
 php artisan config:cache
 ```
 
@@ -135,24 +135,24 @@ php artisan config:cache
 
 Créez la base de données lesprixbas
 
-```bash
+```zsh
 php artisan db:create lesprixbas
 ```
 
 Créez la structure de la base de données
 
-```bash
+```zsh
 php artisan migrate
 ```
 
 Injectez les données
 
-```bash
+```zsh
 php artisan db:seed
 ```
 
 ### 3.2 - Lancement du projet
 
-```bash
+```zsh
 php artisan serve
 ```
