@@ -26,7 +26,7 @@ class ProductsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = DB::table('products')->paginate(env('PAGINATION'));
+        $products = DB::table('products')->paginate(env('PAGINATION', 8));
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
