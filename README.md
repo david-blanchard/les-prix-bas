@@ -101,10 +101,18 @@ Time:   1.39s
 Créez un fichier d'environnement dev avec le fichier test
 
 ```bash
-$ cp .env.testing .env
+cp .env.testing .env
 ```
 
-Editez le fichier .env pour changer APP_ENV=test en APP_ENV=local et supprimez les autres occurrences de test et testing
+Editez le fichier .env pour changer quelques valeurs qui caractérisent l'environnement de test : 
+
+
+> `APP_ENV=`**test**`                  =>     APP_ENV=`**local**
+
+> `DB_CONNECTION=mysql`**_testing**`   =>     DB_CONNECTION=mysql`
+
+> `DB_DATABASE=lesprixbas`**_test**`   =>     DB_DATABASE=lesprixbas`
+
 
 Quittez le mode test
 
