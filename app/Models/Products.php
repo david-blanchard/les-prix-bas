@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\BrandsController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Products extends Model
 {
@@ -46,8 +46,9 @@ class Products extends Model
         return $this->hasMany(ProductImages::class);
     }
 
-    public function productInfo()
+    public function campaignProducts()
     {
-        return $this->hasMany(ProductInfo::class);
+        return $this->hasMany(CampaignProducts::class);
     }
+
 }

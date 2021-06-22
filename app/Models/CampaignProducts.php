@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CampaignProducts extends Model
 {
     use HasFactory;
+
+    public function product()
+    {
+        $this->belongs(Products::class);
+    }
 }
+
