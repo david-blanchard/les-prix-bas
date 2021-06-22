@@ -54,7 +54,7 @@ php artisan db:create lesprixbas_test
 Si la creation par script pose problème, pensez à redémarrer **MySQL** et vider le cache applicatif
 
 ```zsh
-php artisan config:clear
+php artisan config:clear --env=testing
 php artisan cache:clear
 php artisan config:cache --env=testing
 ```
@@ -90,9 +90,11 @@ PASS  Tests\Unit\ProductOneTest
 ✔️ product one is not robe
 ✔️ product one price is 38 euros
 
-PASS  Tests\Feature\ModelTest
-✔️ registration is valid
-✔️ registration is invalid
+PASS  Tests\Feature\ProductModelTest
+✔️ product pantalon is created without image
+✔️ product pantalon without image is deleted
+✔️ product pantalon is created with images
+✔️ product pantalon with images is deleted
 
 PASS  Tests\Feature\RouteTest
 ✔️ mode femme page
@@ -104,8 +106,12 @@ PASS  Tests\Feature\RouteTest
 ✔️ admin ui request as admin
 ✔️ admin ui edit product one
 
-Tests:  16 passed
-Time:   1.39s
+PASS  Tests\Feature\UserModelTest
+✔️ registration is valid
+✔️ registration is invalid
+
+Tests:  20 passed
+Time:   1.50s
 ```
 
 ## 3 - Mode developer
