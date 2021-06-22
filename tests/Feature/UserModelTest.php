@@ -7,7 +7,7 @@ use Faker\Factory;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class ModelTest extends TestCase
+class UserModelTest extends TestCase
 {
     // use RefreshDatabase;
 
@@ -43,8 +43,6 @@ class ModelTest extends TestCase
      */
     public function test_registrationIsInvalid()
     {
-        $faker = Factory::create();
-        $email = $faker->unique()->email;
         $usersCountBefore = User::count();
 
         $this->post("/register", [
