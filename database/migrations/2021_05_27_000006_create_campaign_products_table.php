@@ -15,8 +15,8 @@ class CreateCampaignProductsTable extends Migration
     {
         Schema::create('campaign_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('campaign')->references('id')->on('campaigns');
-            $table->foreignId('product')->references('id')->on('products');
+            $table->foreignId('campaign')->references('id')->on('campaigns')->onDelete('cascade');
+            $table->foreignId('product')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }
