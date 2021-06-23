@@ -15,7 +15,6 @@ class ProductInfoController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
     }
 
     /**
@@ -27,14 +26,14 @@ class ProductInfoController extends Controller
     {
         $props = ProductsHelper::getPropertiesFromCacheById(-1);
         if ($props !== null) {
-            return View('product', $props);
+            return view('product_info', $props);
         }
 
         $attr = ProductsHelper::getAttributesByProductId();
         $props = ProductsHelper::attributesToProperties($attr);
         ProductsHelper::putPropertiesInCacheById(-1, $props);
 
-        return View('product', $props);
+        return view('product_info', $props);
     }
 
     public function show($slug)
@@ -42,7 +41,7 @@ class ProductInfoController extends Controller
 
         $props = ProductsHelper::getPropertiesFromCacheBySlug($slug);
         if ($props !== null) {
-            return View('product', $props);
+            return view('product_info', $props);
         }
 
         $slug2 = Str::slug($slug);
@@ -59,7 +58,7 @@ class ProductInfoController extends Controller
 
         ProductsHelper::putPropertiesInCacheBySlug($slug, $props);
 
-        return View('product', $props);
+        return view('product_info', $props);
 
     }
 
