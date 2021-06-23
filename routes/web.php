@@ -3,7 +3,7 @@
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagesController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProductImagesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SessionController;
@@ -25,16 +25,11 @@ use Illuminate\Support\Facades\Route;
  * Application routes
  */
 
-Route::get('/', [ProductController::class, 'index'])->name('root');
-Route::get('/mode-femme', [ProductController::class, 'index'])->name('default');
-Route::get('/mode-femme/{slug}', [ProductController::class, 'show'])->name('product');
-Route::get('/recherche/{slug}', [ProductController::class, 'show'])->name('search');
+Route::get('/mode-femme', [ProductInfoController::class, 'index'])->name('default');
+Route::get('/mode-femme/{slug}', [ProductInfoController::class, 'show'])->name('product');
+Route::get('/recherche/{slug}', [ProductInfoController::class, 'show'])->name('search');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::redirect('/', '/product', 301);
-
-Route::get('/404', function() {
-    return View('error.404');
-})->name('404');
+Route::redirect('/', '/mode-femme', 301);
 
 /**
  * Session routes
@@ -45,7 +40,7 @@ Route::post('/session/retrieve', [SessionController::class, 'retrieve'])->name('
 /**
  * Administrator area routes
  */
-Route::get('/admin', function() {
+Route::get('/admin', function () {
     return view('admin.main');
 })->name('admin');
 

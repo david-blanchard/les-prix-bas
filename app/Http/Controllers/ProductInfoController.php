@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Helpers\BrandsHelper;
-use App\Library\Helpers\ImagesHelper;
 use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use Illuminate\Support\Str;
 
-class ProductController extends Controller
+class ProductInfoController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -52,7 +50,7 @@ class ProductController extends Controller
         $product = $products->first();
 
         if ($product === null) {
-            return View('error.404');
+            return abort(404);
         }
 
         $attr = $product->getAttributes();

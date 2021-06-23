@@ -1,5 +1,5 @@
 @php
-    $home = route('root');
+    $home = route('default');
     $logo_desktop = '/assets/images/logos/lesprixbas_small.png';
     $logo_mobile = '/assets/images/logos/lesprixbas_smaller.png';
 @endphp
