@@ -62,7 +62,7 @@ class RouteTest extends TestCase
      */
     public function test_adminUiRedirectToLoginAsGuest()
     {
-        $response = $this->get('/admin/products');
+        $response = $this->get('/admin/');
 
         $response->assertRedirect('/login');
     }
@@ -74,7 +74,6 @@ class RouteTest extends TestCase
      */
     public function test_adminUiRequestAsAdminIsValid()
     {
-
         $admin = Auth::loginUsingId(1);
         $this->actingAs($admin);
         $response = $this->get('/admin/');
@@ -89,10 +88,10 @@ class RouteTest extends TestCase
      */
     public function test_adminUiEditProductOneIsValid()
     {
-
         $admin = Auth::loginUsingId(1);
         $this->actingAs($admin);
         $response = $this->get('/admin/products/1/edit');
+
         $response->assertStatus(200);
     }
 

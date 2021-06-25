@@ -28,8 +28,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/mode-femme', [ProductInfoController::class, 'index'])->name('default');
 Route::get('/mode-femme/{slug}', [ProductInfoController::class, 'show'])->name('product');
 Route::get('/recherche/{slug}', [ProductInfoController::class, 'show'])->name('search');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::redirect('/', '/mode-femme', 301);
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/', '/mode-femme', 301)->name('root');
+Route::redirect('/home', '/mode-femme', 301)->name('home');
 
 /**
  * Session routes
@@ -41,8 +42,8 @@ Route::post('/session/retrieve', [SessionController::class, 'retrieve'])->name('
  * Administrator area routes
  */
 Route::get('/admin', function () {
-    return view('admin.main');
-})->name('admin');
+    return view('admin.index');
+})->middleware('admin')->name('admin');
 
 Route::get('/admin/products/index', [ProductsController::class, 'index'])->middleware('admin')->name('products_man');
 Route::get('/admin/products/create', [ProductsController::class, 'create'])->middleware('admin')->name('products_man.create');
@@ -60,7 +61,7 @@ Route::get('/admin/images/create', [ImagesController::class, 'create'])->middlew
 Route::post('/admin/images/store', [ImagesController::class, 'store'])->middleware('admin')->name('images_man.store');
 
 Route::get('/admin/product_images/index', [ProductImagesController::class, 'index'])->middleware('admin')->name('product_images_man');
-Route::get('/admin/product_images/create/{productId}', [ProductImagesController::class, 'create'])->middleware('admin')->name('product_images_man.create');
+Route::get('/admin/product_images/{product}/create', [ProductImagesController::class, 'create'])->middleware('admin')->name('product_images_man.create');
 Route::post('/admin/product_images/store', [ProductImagesController::class, 'store'])->middleware('admin')->name('product_images_man.store');
 
 /**

@@ -38,9 +38,9 @@ class ProductImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($productId)
+    public function create(Products $product)
     {
-        $product = Products::where('id', $productId)->get()->first();
+        $productId = $product['id'];
         $productName = $product['name'];
         $brand = BrandsHelper::getBrandNameById($product['brand']);
         $associatedImages = ImagesHelper::getImagesByProductId($productId);
@@ -69,7 +69,7 @@ class ProductImagesController extends Controller
         ]);
         ProductsHelper::deletePropertiesFromCacheById($productId);
 
-        return redirect()->route('product_images_man.create', ['productId' => $productId]);
+        return redirect()->route('product_images_man.create', $productId);
     }
 
     /**
