@@ -1,5 +1,6 @@
 # LesPrixBas
 
+![Copie d'écran](assets/lesprixbas_screenshot.webp)
 
 ## 1 - Installation
 
