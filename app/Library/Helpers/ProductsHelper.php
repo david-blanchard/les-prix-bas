@@ -57,14 +57,25 @@ class ProductsHelper
      * @param string $phrase
      * @return array
      */
-    public static function grabMoreInfo(string $phrase): array
+    public static function grabMoreInfo(?string $phrase): array
     {
         $result = [];
+
+        if($phrase === null) {
+            return $result;
+        } 
+
         $result = explode(';', $phrase);
 
         return $result;
     }
 
+    /**
+     * Retrieve the discount rate of the campain the product is associated with
+     *
+     * @param integer $productId
+     * @return integer
+     */
     public static function getProductDiscountById(int $productId): int
     {
         $result = 0.0;
@@ -83,6 +94,13 @@ class ProductsHelper
         return $result;
     }
 
+    /**
+     * Get the discount price for the given amount and percent rate
+     * 
+     * @param float|string $price 
+     * @param int $percent 
+     * @return float 
+     */
     public static function computeDiscount(float|string $price, int $percent): float
     {
         $result = 0.00;
