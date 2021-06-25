@@ -44,22 +44,22 @@ Route::get('/admin', function () {
     return view('admin.main');
 })->name('admin');
 
-Route::get('/admin/products', [ProductsController::class, 'index'])->middleware('admin')->name('products_man');
+Route::get('/admin/products/index', [ProductsController::class, 'index'])->middleware('admin')->name('products_man');
 Route::get('/admin/products/create', [ProductsController::class, 'create'])->middleware('admin')->name('products_man.create');
 Route::post('/admin/products/store', [ProductsController::class, 'store'])->middleware('admin')->name('products_man.store');
 Route::get('/admin/products/{product}/edit', [ProductsController::class, 'edit'])->middleware('admin')->name('products_man.edit');
 Route::put('/admin/products/{product}/update', [ProductsController::class, 'update'])->middleware('admin')->name('products_man.update');
 Route::delete('/admin/products/{product}/destroy', [ProductsController::class, 'destroy'])->middleware('admin')->name('products_man.delete');
 
-Route::get('/admin/brands', [BrandsController::class, 'index'])->middleware('admin')->name('brands_man');
+Route::get('/admin/brands/index', [BrandsController::class, 'index'])->middleware('admin')->name('brands_man');
 Route::get('/admin/brands/create', [BrandsController::class, 'create'])->middleware('admin')->name('brands_man.create');
 Route::post('/admin/brands/store', [BrandsController::class, 'store'])->middleware('admin')->name('brands_man.store');
 
-Route::get('/admin/images', [ImagesController::class, 'index'])->middleware('admin')->name('images_man');
+Route::get('/admin/images/index', [ImagesController::class, 'index'])->middleware('admin')->name('images_man');
 Route::get('/admin/images/create', [ImagesController::class, 'create'])->middleware('admin')->name('images_man.create');
 Route::post('/admin/images/store', [ImagesController::class, 'store'])->middleware('admin')->name('images_man.store');
 
-Route::get('/admin/product_images', [ProductImagesController::class, 'index'])->middleware('admin')->name('product_images_man');
+Route::get('/admin/product_images/index', [ProductImagesController::class, 'index'])->middleware('admin')->name('product_images_man');
 Route::get('/admin/product_images/create/{productId}', [ProductImagesController::class, 'create'])->middleware('admin')->name('product_images_man.create');
 Route::post('/admin/product_images/store', [ProductImagesController::class, 'store'])->middleware('admin')->name('product_images_man.store');
 

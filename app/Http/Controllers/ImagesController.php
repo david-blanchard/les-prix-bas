@@ -22,7 +22,7 @@ class ImagesController extends Controller
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
-        return View('admin.images', [
+        return View('admin.images.index', [
             'images' => $images
         ]);
     }

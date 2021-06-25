@@ -6,8 +6,8 @@ use App\Library\Helpers\BrandsHelper;
 use App\Library\Helpers\ImagesHelper;
 use App\Library\Helpers\ProductsHelper;
 use App\Models\Images;
-use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +28,7 @@ class ProductImagesController extends Controller
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
-        return View('admin.product_images', [
+        return View('admin.product_images.index', [
             'products' => $products
         ]);
     }
@@ -40,7 +40,7 @@ class ProductImagesController extends Controller
      */
     public function create($productId)
     {
-        $product = Product::where('id', $productId)->get()->first();
+        $product = Products::where('id', $productId)->get()->first();
         $productName = $product['name'];
         $brand = BrandsHelper::getBrandNameById($product['brand']);
         $associatedImages = ImagesHelper::getImagesByProductId($productId);

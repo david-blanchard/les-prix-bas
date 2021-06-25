@@ -23,7 +23,7 @@ class BrandsController extends Controller
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
-        return View('admin.brands', [
+        return View('admin.brands.index', [
             'brands' => $brands
         ]);
     }
