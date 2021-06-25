@@ -16,7 +16,7 @@ class UserModelTest extends TestCase
      *
      * @return void
      */
-    public function test_registrationIsValid()
+    public function test_registrationWithEmailIsValid()
     {
         $faker = Factory::create();
         $email = $faker->unique()->email;
@@ -41,7 +41,7 @@ class UserModelTest extends TestCase
      *
      * @return void
      */
-    public function test_registrationIsInvalid()
+    public function test_registrationWithoutEmailIsInvalid()
     {
         $usersCountBefore = User::count();
 

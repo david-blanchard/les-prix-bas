@@ -15,7 +15,7 @@ class RouteTest extends TestCase
      *
      * @return void
      */
-    public function test_modeFemmePage()
+    public function test_modeFemmePageIsFound()
     {
         $response = $this->get('/mode-femme/');
 
@@ -27,32 +27,32 @@ class RouteTest extends TestCase
      *
      * @return void
      */
-    public function test_modeFemmePageWithValidSlugVesteOneOfThree()
+    public function test_modeFemmePageWithValidSlugVesteIsFound_1_of_3()
     {
         $response = $this->get('/mode-femme/veste');
 
         $response->assertStatus(200);
     }
 
-    public function test_modeFemmePageWithValidSlugRobeTwoOfThree()
+    public function test_modeFemmePageWithValidSlugRobeIsFound_2_of_3()
     {
         $response = $this->get('/mode-femme/robe');
 
         $response->assertStatus(200);
     }
 
-    public function test_modeFemmePageWithValidSlugMailleThreeOfThree()
+    public function test_modeFemmePageWithValidSlugMailleIsFound_3_of_3()
     {
         $response = $this->get('/mode-femme/maille');
 
         $response->assertStatus(200);
     }
 
-    public function test_modeFemmePageWithInvalidSlugPantalon()
+    public function test_modeFemmePageWithInvalidSlugPantalonIs_404()
     {
         $response = $this->get('/mode-femme/pantalon');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     /**
@@ -72,7 +72,7 @@ class RouteTest extends TestCase
      *
      * @return void
      */
-    public function test_adminUiRequestAsAdmin()
+    public function test_adminUiRequestAsAdminIsValid()
     {
 
         $admin = Auth::loginUsingId(1);
@@ -87,7 +87,7 @@ class RouteTest extends TestCase
      *
      * @return void
      */
-    public function test_adminUiEditProductOne()
+    public function test_adminUiEditProductOneIsValid()
     {
 
         $admin = Auth::loginUsingId(1);

@@ -24,7 +24,7 @@ class CampaignOneTest extends TestCase
      *
      * @return void
      */
-    public function test_campaignOneDiscountRateIs_15_percent()
+    public function test_campaignOneDiscountRateIs_15_percents()
     {
         $row = DB::table('campaigns')->select('discount')->get()->first();
 
