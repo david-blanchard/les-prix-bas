@@ -82,7 +82,7 @@ Résultat attendu :
 ```zsh
 PASS  Tests\Unit\CampaignOneTest
 ✔️ campaign one exists
-✔️ campaign one discount rate is 15 percent
+✔️ campaign one discount rate is 15 percents
 
 PASS  Tests\Unit\ProductOneTest
 ✔️ product one exists
@@ -94,24 +94,24 @@ PASS  Tests\Feature\ProductModelTest
 ✔️ product pantalon is created without image
 ✔️ product pantalon without image is deleted
 ✔️ product pantalon is created with images
-✔️ product pantalon with images is deleted
+✔️ product pantalon with images is deleted in cascade
 
 PASS  Tests\Feature\RouteTest
-✔️ mode femme page
-✔️ mode femme page with valid slug veste one of three
-✔️ mode femme page with valid slug robe two of three
-✔️ mode femme page with valid slug maille three of three
-✔️ mode femme page with invalid slug pantalon
+✔️ mode femme page is found
+✔️ mode femme page with valid slug veste is found 1 of 3
+✔️ mode femme page with valid slug robe is found 2 of 3
+✔️ mode femme page with valid slug maille is found 3 of 3
+✔️ mode femme page with invalid slug pantalon is 404
 ✔️ admin ui redirect to login as guest
-✔️ admin ui request as admin
-✔️ admin ui edit product one
+✔️ admin ui request as admin is valid
+✔️ admin ui edit product one is valid
 
 PASS  Tests\Feature\UserModelTest
-✔️ registration is valid
-✔️ registration is invalid
+✔️ registration with email is valid
+✔️ registration without email is invalid
 
 Tests:  20 passed
-Time:   1.50s
+Time:   1.21s
 ```
 
 ## 3 - Mode developer
