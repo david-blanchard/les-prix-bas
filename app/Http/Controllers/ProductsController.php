@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsRequest;
 use App\Library\Helpers\BrandsHelper;
 use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
@@ -30,7 +31,7 @@ class ProductsController extends Controller
         if (!$user || $user->role !== User::ADMIN_ROLE) {
             return redirect()->route('login');
         }
-        return View('admin.products', [
+        return View('admin.products.index', [
             'products' => $products
         ]);
     }
@@ -52,11 +53,13 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductsRequest $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
+        $validated = $request->validated();
+        
         Products::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),

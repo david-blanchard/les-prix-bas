@@ -22,25 +22,45 @@ Les prix bas !
         <div class="col-12">
             <div class="form-group">
                 <label>Nom</label>
-                <input type="text" name="name" class="form-control" placeholder="Nom du produit" />
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nom du produit" />
+                @error("name")
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" class="form-control w-100" placeholder="Décrivez le produit en un paragraphe de 1000 caractères maximum"></textarea>
+                <textarea name="description" class="form-control w-100 @error('description') is-invalid @enderror" placeholder="Décrivez le produit en un paragraphe de 1000 caractères maximum"></textarea>
+                @error("description")
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Compléments d'information (liste énumérée)</label>
                 <textarea name="more_infos" class="form-control w-100" placeholder="Entrez de petites phrases séparées par des point-virgules"></textarea>
+                @error("more_infos")
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror                
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Prix</label>
-                <input type="text" name="price" class="form-control" placeholder="0,00" />
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="0,00" />
+                @error("price")
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror   
             </div>
         </div>
         <div class="col-12">
@@ -53,6 +73,11 @@ Les prix bas !
                     </option>
                 @endforeach
                 </select>
+                @error("brand")
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror  
             </div>
         </div>
         <div class="col-12">

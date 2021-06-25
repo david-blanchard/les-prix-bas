@@ -30,7 +30,7 @@ class ProductsHelper
     }
 
     /**
-     * Transform Product attributes in properties usable in views
+     * Transform ProductInfo attributes in properties usable in views
      *
      * @param array $props
      * @return array

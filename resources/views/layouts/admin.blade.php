@@ -1,3 +1,6 @@
+@php
+    $hasErrors = count($errors); 
+@endphp
 <html lang="en" class="h-100">
 
 <head>
@@ -20,6 +23,14 @@
     <script src="/assets/js/vendor/jquery.slim.min.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.js"></script>
     @yield('header_javascripts')
+
+    @if($hasErrors)
+    <style>
+        .invalid-feedback {
+            display: block !important;
+        }
+    </style> 
+    @endif
 
 </head>
 
