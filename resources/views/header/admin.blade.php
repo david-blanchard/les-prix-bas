@@ -58,3 +58,4 @@
         </nav>
     </div>
 </header>
+@include('admin.includes.alerts')

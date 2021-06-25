@@ -68,7 +68,7 @@ class ProductsController extends Controller
             'brand' => $request->input('brand'),
         ]);
 
-        return redirect()->route('products_man')->with('warning', "Le produit a bien été enregistré");
+        return redirect()->route('products_man')->with('success', "Le produit a bien été enregistré");
     }
 
     /**
