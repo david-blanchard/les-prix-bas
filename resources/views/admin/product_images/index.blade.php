@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Les prix bas !
+LesPrixBas Admin UI
 @stop
 
 @section('stylesheets')
@@ -29,7 +29,7 @@ Les prix bas !
             @foreach ($products as $item)
             <tr>
                 <th>
-                    <a href="{{ route('product_images_man.create', ['productId' => $item->id]) }}" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
+                    <a href="{{ route('product_images_man.create', $item->id) }}" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
                         <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
                 </th>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Les prix bas !
+LesPrixBas Admin UI
 @stop
 
 @section('stylesheets')
@@ -66,8 +66,6 @@ Les prix bas !
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->brand }}</td>
                 <td>
-     
-
                     <form action="{{ route('products_man.delete', $item->id) }}" method="POST">
                     @csrf
                     @method("DELETE")

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Les prix bas !
+LesPrixBas Admin UI
 @stop
 
 @section('stylesheets')
@@ -8,8 +8,8 @@ Les prix bas !
 
 @section('head_javascripts')
 @stop
-
 @section('children')
+
 <div class="container">
     <div class="row my-5 mx-3 justify-content-center">
         <h1>
