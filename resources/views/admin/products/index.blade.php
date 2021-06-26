@@ -66,12 +66,47 @@ LesPrixBas Admin UI
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->brand }}</td>
                 <td>
+                    <button type="button"
+                        class="btn btn-outline-danger"
+                        onclick="document.querySelector('#delete-modal-{{ $item->id }}').style.display='block'"
+                    >
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                     <form action="{{ route('products_man.delete', $item->id) }}" method="POST">
                     @csrf
                     @method("DELETE")
-                        <button type="submit" class="btn btn-outline-danger" >
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
+                        <div id="delete-modal-{{ $item->id }}" class="modal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Attention: la suppression est définitive</h5>
+                                    <button type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Fermer"
+                                        onclick="document.querySelector('#delete-modal-{{ $item->id }}').style.display='none'"
+                                    >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Voulez-vous vraiment supprimer "{{ $item->name }}" ?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" 
+                                        class="btn btn-secondary" 
+                                        data-dismiss="modal"
+                                        onclick="document.querySelector('#delete-modal-{{ $item->id }}').style.display='none'"
+                                    >
+                                        Annuler
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Supprimer</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+             
                     </form>
                 </td>
             </tr>
