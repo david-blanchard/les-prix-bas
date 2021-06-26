@@ -53,7 +53,7 @@ class ImagesController extends Controller
             'title' => $request->input('title'),
         ]);
 
-        return redirect()->route('images_man');        
+        return redirect()->route('images.index');        
     }
 
     /**

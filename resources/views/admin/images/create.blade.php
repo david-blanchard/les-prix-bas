@@ -17,12 +17,12 @@ Les prix bas !
     <h2 class="text-center my-5">
         Ajouter une image
     </h2>
-    <form method="POST" action="{{ route('images_man.store') }}">
+    <form method="POST" action="{{ route('images.store') }}">
         @csrf
         <div class="col-12">
             <div class="form-group">
                 <label>URL</label>
-                <input type="text" name="name" class="form-control" placeholder="URL" />
+                <input type="text" name="url" class="form-control" placeholder="URL" />
             </div>
         </div>
         <div class="col-12">

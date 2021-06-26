@@ -68,7 +68,7 @@ class ProductsController extends Controller
             'brand' => $request->input('brand'),
         ]);
 
-        return redirect()->route('products_man')->with('success', "Le produit a bien été enregistré");
+        return redirect()->route('products.index')->with('success', "Le produit a bien été enregistré");
     }
 
     /**
@@ -117,7 +117,7 @@ class ProductsController extends Controller
         // since we just updated them
         ProductsHelper::deletePropertiesFromCacheById($product->id);
 
-        return redirect()->route('products_man')->with('success', "Le produit a bien été mis à jour");
+        return redirect()->route('products.index')->with('success', "Le produit a bien été mis à jour");
 
     }
 
@@ -131,6 +131,6 @@ class ProductsController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('products_man')->with('success', "Le produit a bien été supprimé");
+        return redirect()->route('products.index')->with('success', "Le produit a bien été supprimé");
     }
 }

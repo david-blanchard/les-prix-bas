@@ -16,7 +16,7 @@ LesPrixBas Admin UI
 <div class="container">
     <h2 class="text-center my-5">
         Produits
-        <a href="{{ route('products_man.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
+        <a href="{{ route('products.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </h2>
@@ -37,7 +37,7 @@ LesPrixBas Admin UI
             @foreach ($products as $item)
             <tr>
                 <th>
-                    <a href="{{ route('products_man.edit', $item->id) }}" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
+                    <a href="{{ route('products.edit', $item->id) }}" class="btn btn-outline-warning" alt="Editer {{ $item->id }}" title="Editer {{ $item->id }}">
                         <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
                 </th>
@@ -72,7 +72,7 @@ LesPrixBas Admin UI
                     >
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
-                    <form action="{{ route('products_man.delete', $item->id) }}" method="POST">
+                    <form action="{{ route('products.destroy', $item->id) }}" method="POST">
                     @csrf
                     @method("DELETE")
                         <div id="delete-modal-{{ $item->id }}" class="modal" tabindex="-1">

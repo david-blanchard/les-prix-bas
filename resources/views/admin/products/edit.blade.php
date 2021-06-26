@@ -17,7 +17,7 @@ Les prix bas !
     <h2 class="text-center my-5">
         Modifier un produit
     </h2>
-    <form method="POST" action="{{ route('products_man.update', $product->id) }}">
+    <form method="POST" action="{{ route('products.update', $product->id) }}">
         @csrf
         @method("PUT")
         <div class="col-12">

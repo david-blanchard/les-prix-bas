@@ -36,22 +36,22 @@
                 </a>
             </div>
             <div class='nav-item active'>
-                <a class="nav-link  bg-light " href="{{ route('products_man') }}">
+                <a class="nav-link  bg-light " href="{{ route('products.index') }}">
                     Gérer les produits
                 </a>
             </div>
             <div class='nav-item active'>
-                <a class="nav-link  bg-light " href="{{ route('product_images_man') }}">
+                <a class="nav-link  bg-light " href="{{ route('product_images.index') }}">
                     Gérer les images par produit
                 </a>
             </div>
             <div class='nav-item active'>
-                <a class="nav-link  bg-light " href="{{ route('images_man') }}">
+                <a class="nav-link  bg-light " href="{{ route('images.index') }}">
                     Gérer la bibliothèque d'images
                 </a>
             </div>
             <div class='nav-item active'>
-                <a class="nav-link  bg-light " href="{{ route('brands_man') }}">
+                <a class="nav-link  bg-light " href="{{ route('brands.index') }}">
                     Gérer les marques
                 </a>
             </div>

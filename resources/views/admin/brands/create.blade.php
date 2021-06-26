@@ -17,7 +17,7 @@ Les prix bas !
     <h2 class="text-center my-5">
         Ajouter une marque
     </h2>
-    <form method="POST" action="{{ route('brands_man.store') }}">
+    <form method="POST" action="{{ route('brands.store') }}">
         @csrf
         <div class="col-12">
             <div class="form-group">

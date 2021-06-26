@@ -69,7 +69,7 @@ class ProductImagesController extends Controller
         ]);
         ProductsHelper::deletePropertiesFromCacheById($productId);
 
-        return redirect()->route('product_images_man.create', $productId);
+        return redirect()->route('product_images.create', $productId);
     }
 
     /**

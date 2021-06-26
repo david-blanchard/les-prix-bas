@@ -52,7 +52,7 @@ class BrandsController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->route('brands_man');   
+        return redirect()->route('brands.index');   
     }
 
     /**

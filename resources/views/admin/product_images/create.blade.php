@@ -52,7 +52,7 @@ Les prix bas !
             </tr>
             <tr>
                 <td colspan="4">
-                    <form method="POST" action="{{ route('product_images_man.store') }}">
+                    <form method="POST" action="{{ route('product_images.store') }}">
                         @csrf
                         <input type="hidden" name="product" value="{{ $productId }}" />
                         <div class="col-12">

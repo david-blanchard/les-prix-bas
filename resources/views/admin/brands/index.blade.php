@@ -13,7 +13,7 @@ Les prix bas !
 <div class="container">
     <h2 class="text-center my-5">
         Marques
-        <a href="{{ route('brands_man.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
+        <a href="{{ route('brands.create') }}" class="btn btn-outline-primary" alt="Créer" title="Créer">
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </h2>
