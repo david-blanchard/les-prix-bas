@@ -6,12 +6,17 @@
 
 ### 1.1 - Pré-requis
 
-
 Vous avez un serveur de base de données **MySQL** fonctionnel et accessible sur localhost.
 
 Vous avez **PHP** en version **8** minimum ainsi que **Composer**.
 
 Votre environnement de développement est sous **Linux**, **MacOS** ou **Windows WSL 2**.
+
+Le projet est développé à l'aide de **Laravel 8**.
+
+Le cache applicatif est géré par **Memcached**. Le serveur Memcached doit être installé et mis en service. L'extension **php-memcached** doit être installée.
+
+### 1.2 - Installation
 
 Clonez le repo :
 
@@ -25,11 +30,7 @@ Installez les dépendances :
 composer u
 ```
 
-Corrigez les erreurs s'il y en a.
-
-
 ## 2 - Phase de test
-
 
 Passez en mode test
 
@@ -40,7 +41,7 @@ php artisan config:cache --env=testing
 ### 2.1 - Migration des données
 
 
-Dans le fichier .env.testing, modifiez les accès **MySQL** pour que les migrations en base s'effectuent sans problème.
+Dans le fichier .env.testing, modifiez les accès **MySQL** pour refléter vos paramètres de connexion afin que les migrations en base s'effectuent sans problème.
 
 > `DB_USERNAME=`**root**
 
@@ -50,12 +51,6 @@ Créez la base de données de test
 
 ```zsh
 php artisan db:create
-```
-
-en cas de problème, vous pouvez opter pour une solution plus classique
-
-```zsh
-mysql -uroot -p < database/scripts/create.test.sql
 ```
 
 Créez la structure de la base de données de test
@@ -153,12 +148,6 @@ Créez la base de données lesprixbas
 php artisan db:create
 ```
 
-en cas de problème, vous pouvez opter pour une solution plus classique
-
-```zsh
-mysql -uroot -p < database/scripts/create.sql
-```
-
 Créez la structure de la base de données
 
 ```zsh
@@ -176,3 +165,15 @@ php artisan db:seed
 ```zsh
 php artisan serve
 ```
+## 4 - Utilisation du projet
+
+### 4.1 - Côté visiteur
+
+L'application s'ouvre sur la page produit Veste en jean de la catégorie Mode Femme.
+
+3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe et maille. La sélection peut aussi se faire directement dans la barre de navigation sous la catégorie /mode-femme/.
+
+### 4.1 - Côté admin
+
+Les deux autres produits n'ont pas d'image associée, pour cela il faut passer côté admin en se connectant avec les identifiants admin@lpb.fr/demo.
+
