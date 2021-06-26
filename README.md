@@ -49,15 +49,13 @@ Dans le fichier .env.testing, modifiez les accès **MySQL** pour que les migrati
 Créez la base de données de test
 
 ```zsh
-php artisan db:create lesprixbas_test
+php artisan db:create
 ```
 
-Si la creation par script pose problème, pensez à redémarrer **MySQL** et vider le cache applicatif
+en cas de problème, vous pouvez opter pour une solution plus classique
 
 ```zsh
-php artisan config:clear --env=testing
-php artisan cache:clear
-php artisan config:cache --env=testing
+mysql -uroot -p < database/scripts/create.test.sql
 ```
 
 Créez la structure de la base de données de test
@@ -78,6 +76,7 @@ Lancez le test
 ```zsh
 php artisan test
 ```
+
 Résultat attendu :
 
 ```zsh
@@ -151,7 +150,13 @@ php artisan config:cache
 Créez la base de données lesprixbas
 
 ```zsh
-php artisan db:create lesprixbas
+php artisan db:create
+```
+
+en cas de problème, vous pouvez opter pour une solution plus classique
+
+```zsh
+mysql -uroot -p < database/scripts/create.sql
 ```
 
 Créez la structure de la base de données
