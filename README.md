@@ -169,7 +169,7 @@ php artisan serve
 
 L'application s'ouvre sur la page produit Veste en jean de la catégorie Mode Femme.
 
-3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe et maille. La sélection peut aussi se faire directement dans la barre de navigation sous la catégorie /mode-femme/. Deux des trois produits affichent un prix remisé.
+3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe ou maille. La sélection peut aussi se faire directement dans la barre d'URL sous la catégorie /mode-femme/. Deux des trois produits affichent un prix remisé.
 
 ### 4.1 - La barre de recherche
 
@@ -177,13 +177,13 @@ Toute simple, elle permet de retrouver les autres produits créés en base sans 
 
 ### 4.2 - L'authentification 
 
-J'ai utilisé le système d'authentification embarqué dans Laravel 8 qui est d'une simplicité maximum tout en étant complet. La connexion fait la différence entre un utilisateur lambda et admin.
+J'ai utilisé le système d'authentification embarqué dans Laravel 8 qui est d'une simplicité maximum tout en étant complet. La connexion fait la différence entre un utilisateur lambda et admin. Toutes les inscriptions sont lambda. Le login admin est géré directement en base (voir le fichier AdminSeeder.php).
 
 ### 4.3 - Le panier
 
-On peut ajouter autant de produit que l'on veut au panier. Le total tient compte des prix remisés. Tout se passe en backend. 
+On peut ajouter autant de produits que l'on veut au panier. Le total tient compte des prix remisés. Tout se passe en backend. 
 
-A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici Cart), la quantité de produit à ajouter et l'ID du produit. Côté backend, l'objet de session Cart est retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés pour chaque produit figurant dans le panier. Une fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
+A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici Cart), la quantité de produits à ajouter et l'ID du produit. Côté backend, l'objet de session Cart est retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés pour chaque produit figurant dans le panier. Une fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
 
 La suppression des produits du panier ou la diminution des quantités ne sont pas implémentées, une page dédiée au panier serait plus simple pour ces opérations.
 
@@ -191,7 +191,7 @@ Le panier est conservé tout au long de la session quand le visiteur est authent
 
 ## 5 - Côté admin
 
-Sur les trois produits en base, les deux derniers n'ont pas d'image associée afin de montrer comprendre comment ça marche. Il est aussi possible de créer de nouveau produits, images et marques. Pour cela il faut passer côté admin en se connectant avec les identifiants admin@lpb.fr/demo. 
+Sur les trois produits en base, les deux derniers n'ont pas d'image associée afin de montrer comprendre comment ça marche. Il est aussi possible de créer de nouveaux produits, images et marques. Pour cela il faut passer côté admin en se connectant avec les identifiants admin@lpb.fr/demo. 
 
 ### 5.1 - Gérer les produits
 
@@ -209,6 +209,9 @@ On doit renseigner :
 - une marque sélectionnée parmi celles existantes
 
 Les images ne peuvent pas être assoiciées au moment de la création du produit du fait des relations entre les tables. Le produit doit être créé avant que les images lui soit associées.
+
+Les propriétés d'affichage du produit sont conservées en cache applicatif. Le produit est supprimé du cache après une modification ou une suppression depuis l'Admin UI. Le produit est remis en cache lorsqu'il est rappelé par la page produit.
+
 ### 5.2 - Associer des images à un produit
 
 Lors de la connexion admin on reste sur la page produit. On peut voir sous les images un bouton "Ajouter des images au produit". On arrive sur la page de gestion des images par produit. Les images sont déjà enregistrées en base pour les trois produits prédéfinis, il n'y a qu'à les associer en rapport avec le nom du produit.
