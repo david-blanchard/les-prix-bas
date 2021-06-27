@@ -44,8 +44,7 @@ class ProductInfoController extends Controller
             return view('product_info', $props);
         }
 
-        $slug2 = Str::slug($slug);
-        $products = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug2 . '%')->get();
+        $products = Products::where('slug', $slug)->orWhere('slug', 'like', '%' . $slug . '%')->get();
         $product = $products->first();
 
         if ($product === null) {

@@ -129,6 +129,9 @@ class ProductsController extends Controller
      */
     public function destroy(Products $product)
     {
+        // Delete product properties from the cache
+        ProductsHelper::deletePropertiesFromCacheById($product->id);
+        // before actually deleting it from the database
         $product->delete();
 
         return redirect()->route('products.index')->with('success', "Le produit a bien été supprimé");
