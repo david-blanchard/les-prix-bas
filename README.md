@@ -165,15 +165,66 @@ php artisan db:seed
 ```zsh
 php artisan serve
 ```
-## 4 - Utilisation du projet
-
-### 4.1 - Côté visiteur
+## 4 - LesPrixBas côté visiteur
 
 L'application s'ouvre sur la page produit Veste en jean de la catégorie Mode Femme.
 
-3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe et maille. La sélection peut aussi se faire directement dans la barre de navigation sous la catégorie /mode-femme/.
+3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe et maille. La sélection peut aussi se faire directement dans la barre de navigation sous la catégorie /mode-femme/. Deux des trois produits affichent un prix remisé.
 
-### 4.1 - Côté admin
+### 4.1 - La barre de recherche
 
-Les deux autres produits n'ont pas d'image associée, pour cela il faut passer côté admin en se connectant avec les identifiants admin@lpb.fr/demo.
+Toute simple, elle permet de retrouver les autres produits créés en base sans passer par la barre d'URL du navigateur. Techniquement, la recherche se fait par une simple requête SELECT/LIKE. Elle n'était pas demandée mais je l'ai trouvée nécessaire. Il aurait été compliqué de sélectionner le produit voulu dans la barre d'URL en tapant le slug complet.
 
+### 4.2 - L'authentification 
+
+J'ai utilisé le système d'authentification embarqué dans Laravel 8 qui est d'une simplicité maximum tout en étant complet. La connexion fait la différence entre un utilisateur lambda et admin.
+
+### 4.3 - Le panier
+
+On peut ajouter autant de produit que l'on au panier. Le total tient compte des prix remisés. Tout se passe en backend. A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici cart), la quantité de produit à ajouter et l'ID du produit. Côté backend, l'objet de session Cart et retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés. Le panier est conservé tout au long de la session quand le visiteur est authentifié. On peut ajouter différents produits avec différentes remises. Un fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
+
+La suppression des produits n'est pas implémentée, une page dédiée au panier serait plus simple pour cette opération.
+
+Le panier est vidé quand le client se déconnecte.
+
+## 5 - Côté admin
+
+Sur les trois produits en base, les deux derniers n'ont pas d'image associée afin de montrer comprendre comment ça marche. Il est aussi possible de créer de nouveau produits, images et marques. Pour cela il faut passer côté admin en se connectant avec les identifiants admin@lpb.fr/demo. 
+
+### 5.1 - Gérer les produits
+
+Lors de la connexion admin on reste sur la page produit, pour passer dans l'admin UI il faut sélectionner la rubrique Admin UI du menu déroulant utilisateur.
+
+Allez à la rubrique "Gérer les produits". Chosissez un produit à modifier ou créez-en un nouveau en cliquant sur l'icône bleue à côté de Produits.
+
+Lors de la création, une validation des champs a été ajoutée via une ProductsRequest.
+
+On doit renseigner : 
+- le nom du produit (255 car. max)
+- la description (1000 car. max)
+- une liste énumérée de petites phrases séparées par des point-virgules donnant des détails (optionnel, 1000 car. max)
+- un prix décimal supérieur à 0
+- une marque sélectionnée parmi celle existante
+
+Les images ne peuvent pas être assoiciées au moment de la création du produit du fait des relations entre les tables. Le produit doit être créé avant que les images lui soit associées.
+### 5.2 - Associer des images à un produit
+
+Lors de la connexion admin on reste sur la page produit. On peut voir sous les images un bouton "Ajouter des images au produit". On arrive sur la page de gestion des images par produit. Les images sont déjà enregistrées en base pour les trois produits prédéfinis, il n'y a qu'à les associer en rapport avec le nom du produit.
+
+### 5.3 - Ajouter des images
+
+On peut ajouter d'autres images dans la rubrique "Gérer les images".
+
+Le formulaire attend une URL et deux descriptions pour les tag alt et title (SEO).
+
+L'URL peut être une image externe ou un chemin relatif vers un fichier stockés dans les assets du site. Pour le test, toutes images sont stockées dans les assets.
+
+### 5.4 - Ajouter une marque
+
+Le formulaire ne comporte que le champ nom. Il est utile de passer par ce formulaire avant de créer de nouveaux produits afin de sélectionner la bonne marque pour le bon produit. Il est toutefois possible de modifier le produit pour changer la marque.
+
+### 5.5 - Fonctionnalités non prises en charge
+
+La suppression de l'association d'une image à un produit n'a pas été implémentée.
+La modification et la suppression d'une image n'a pas été implémentée.
+La modification et la suppression d'une marque n'a pas été implémentée.
