@@ -225,13 +225,13 @@ L'URL peut être une image externe ou un chemin relatif vers un fichier stockés
 
 Le formulaire ne comporte que le champ nom. Il est utile de passer par ce formulaire avant de créer de nouveaux produits afin de sélectionner la bonne marque pour le bon produit. Il est toutefois possible de modifier le produit pour changer la marque.
 
-### 5.6 - Les campagnes de promos
+### 5.5 - Les campagnes de promos
 
-J'ai ajouté une table Campaigns pour gérer les remises et CampaignProducts pour la relation avec les produits. Il m'a semblé plus simple de mettre en place ce disposition pour la gestion du panier et la clareté de code que mettre en dur une remise de 25% par exemple.
+J'ai ajouté une table Campaigns pour gérer les remises et CampaignProducts pour la relation avec les produits. Il m'a semblé plus simple de mettre en place ce dispositif pour la gestion du panier et la clareté de code que de mettre en dur une remise de 25% par exemple qui devait être gérée à la fois côté Front et Back.
 
-### 5.5 - Fonctionnalités non prises en charge
+### 5.6 - Fonctionnalités non prises en charge
 
 La suppression de l'association d'une image à un produit n'a pas été implémentée.
-La modification et la suppression d'une image n'a pas été implémentée.
-La modification et la suppression d'une marque n'a pas été implémentée.
-La gestion complète des campagnes de promos.
+La modification et la suppression d'une image n'ont pas été implémentées.
+La modification et la suppression d'une marque n'ont pas été implémentées.
+La gestion complète des campagnes de promos n'est pas implémentée.
