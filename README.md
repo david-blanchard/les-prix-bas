@@ -232,6 +232,9 @@ J'ai ajouté une table Campaigns pour gérer les remises et CampaignProducts pou
 ### 5.6 - Fonctionnalités non prises en charge
 
 La suppression de l'association d'une image à un produit n'a pas été implémentée.
+
 La modification et la suppression d'une image n'ont pas été implémentées.
+
 La modification et la suppression d'une marque n'ont pas été implémentées.
+
 La gestion complète des campagnes de promos n'est pas implémentée.
