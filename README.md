@@ -181,11 +181,13 @@ J'ai utilisé le système d'authentification embarqué dans Laravel 8 qui est d'
 
 ### 4.3 - Le panier
 
-On peut ajouter autant de produit que l'on au panier. Le total tient compte des prix remisés. Tout se passe en backend. A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici cart), la quantité de produit à ajouter et l'ID du produit. Côté backend, l'objet de session Cart et retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés. Le panier est conservé tout au long de la session quand le visiteur est authentifié. On peut ajouter différents produits avec différentes remises. Un fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
+On peut ajouter autant de produit que l'on veut au panier. Le total tient compte des prix remisés. Tout se passe en backend. 
 
-La suppression des produits n'est pas implémentée, une page dédiée au panier serait plus simple pour cette opération.
+A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici Cart), la quantité de produit à ajouter et l'ID du produit. Côté backend, l'objet de session Cart est retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés pour chaque produit figurant dans le panier. Une fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
 
-Le panier est vidé quand le client se déconnecte.
+La suppression des produits du panier ou la diminution des quantités ne sont pas implémentées, une page dédiée au panier serait plus simple pour ces opérations.
+
+Le panier est conservé tout au long de la session quand le visiteur est authentifié. Il est vidé quand le client se déconnecte.
 
 ## 5 - Côté admin
 
@@ -204,7 +206,7 @@ On doit renseigner :
 - la description (1000 car. max)
 - une liste énumérée de petites phrases séparées par des point-virgules donnant des détails (optionnel, 1000 car. max)
 - un prix décimal supérieur à 0
-- une marque sélectionnée parmi celle existante
+- une marque sélectionnée parmi celles existantes
 
 Les images ne peuvent pas être assoiciées au moment de la création du produit du fait des relations entre les tables. Le produit doit être créé avant que les images lui soit associées.
 ### 5.2 - Associer des images à un produit
@@ -223,8 +225,13 @@ L'URL peut être une image externe ou un chemin relatif vers un fichier stockés
 
 Le formulaire ne comporte que le champ nom. Il est utile de passer par ce formulaire avant de créer de nouveaux produits afin de sélectionner la bonne marque pour le bon produit. Il est toutefois possible de modifier le produit pour changer la marque.
 
+### 5.6 - Les campagnes de promos
+
+J'ai ajouté une table Campaigns pour gérer les remises et CampaignProducts pour la relation avec les produits. Il m'a semblé plus simple de mettre en place ce disposition pour la gestion du panier et la clareté de code que mettre en dur une remise de 25% par exemple.
+
 ### 5.5 - Fonctionnalités non prises en charge
 
 La suppression de l'association d'une image à un produit n'a pas été implémentée.
 La modification et la suppression d'une image n'a pas été implémentée.
 La modification et la suppression d'une marque n'a pas été implémentée.
+La gestion complète des campagnes de promos.
