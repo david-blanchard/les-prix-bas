@@ -20,8 +20,8 @@ class CampaignProductsSeeder extends Seeder
             'product' => 1,
         ]);
         CampaignProducts::create([
-            'campaign' => 1,
-            'product' => 2,
+            'campaign' => 2,
+            'product' => 1,
         ]);
         CampaignProducts::create([
             'campaign' => 2,
