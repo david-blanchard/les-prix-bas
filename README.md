@@ -169,7 +169,7 @@ php artisan serve
 
 L'application s'ouvre sur la page produit Veste en jean de la catégorie Mode Femme.
 
-3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe ou maille. La sélection peut aussi se faire directement dans la barre d'URL sous la catégorie /mode-femme/. Deux des trois produits affichent un prix remisé.
+3 produits sont prédéfinis, ils peuvent être sélectionnés par la barre de recherche avec les mots-clés : veste, robe ou maille. Deux des trois produits affichent un prix remisé.
 
 ### 4.1 - La barre de recherche
 
@@ -183,7 +183,7 @@ J'ai utilisé le système d'authentification embarqué dans Laravel 8 qui est d'
 
 On peut ajouter autant de produits que l'on veut au panier. Le total tient compte des prix remisés. Tout se passe en backend. 
 
-A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici Cart), la quantité de produits à ajouter et l'ID du produit. Côté backend, l'objet de session Cart est retrouvé et s'il était déjà rempli le total des prouits est calculé en tenant compte des remises et des quanittés pour chaque produit figurant dans le panier. Une fois le calcul de panier fait, il est renvoyé côté client avec les deux seules informations : quantité, total. C'est une fonction JS qui fait l'affichage du panier.
+A chaque clic sur "Ajouter au panier" une requête ajax envoie un objet JS contenant le type d'objet de session à stocker (ici Cart), la quantité de produits à ajouter et l'ID du produit. Côté backend, l'objet de session Cart est retrouvé et s'il était déjà rempli le total des produits est calculé en tenant compte des remises et des quanittés pour chaque produit figurant dans le panier. Une fois le calcul du panier fait, il est renvoyé côté client avec les deux seules informations : quantité et total. C'est une fonction JS qui fait l'affichage du panier.
 
 La suppression des produits du panier ou la diminution des quantités ne sont pas implémentées, une page dédiée au panier serait plus simple pour ces opérations.
 
