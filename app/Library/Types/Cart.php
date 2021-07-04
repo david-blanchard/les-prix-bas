@@ -4,7 +4,6 @@ namespace App\Library\Types;
 
 use App\Library\Helpers\ProductsHelper;
 use App\Library\Interfaces\CartInterface;
-use App\Library\Utils\MiscUtils;
 
 class Cart extends AbstractSessionObject implements CartInterface
 {
@@ -133,7 +132,22 @@ class Cart extends AbstractSessionObject implements CartInterface
         }
     }
 
-
+    /**
+     * Used to make a default object
+     *
+     * @return array
+     */
+    public function makeEmptySessionObject(): array
+    {
+        return [
+            'type' => 'Cart',
+            'content' => [
+                [
+                    'productId' => 0,
+                    'quantity' => 0,
+                ]
+            ]
+        ];
+    }
     
-
 }

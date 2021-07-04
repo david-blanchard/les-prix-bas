@@ -73,20 +73,9 @@ abstract class AbstractSessionObject implements SessionObjectInterface
     }
 
     /**
-     * Undocumented function
+     * Used to make a default object
      *
      * @return array
      */
-    public function makeEmptySessionObject(): array
-    {
-        return [
-            'type' => 'Cart',
-            'content' => [
-                [
-                    'productId' => 0,
-                    'quantity' => 0,
-                ]
-            ]
-        ];
-    }
+    abstract public function makeEmptySessionObject(): array;
 }
