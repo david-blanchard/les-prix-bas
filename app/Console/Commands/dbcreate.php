@@ -40,15 +40,18 @@ class dbcreate extends Command
     public function handle()
     {
         $env = config('app.env');
-        $connection = "database.connections.mysql";
-        // $connection .= $this->argument("connection");
+
+        $connection = 'mysql';
 
         if($env === 'test') {
             $connection .= "_testing";
         }
         $schemaName = config("$connection.database");
+        $userName = config("$connection.username");
+        $userPassword = config("$connection.password");
         $charset = config("$connection.charset",'utf8mb4');
         $collation = config("$connection.collation",'utf8mb4_unicode_ci');
+        $dbUser = "'$userName'@localhost";
 
         config(["$connection.database" => null]);
 
@@ -56,13 +59,34 @@ class dbcreate extends Command
 
         $ok = DB::statement($query);
 
+        if(!$ok) {
+            $this->error("Database '$schemaName' creation went wrong!");
+            return 1;
+        }
+
+        $query = "CREATE USER $dbUser IDENTIFIED BY '$userPassword';";
+        $ok = DB::statement($query);
+
+        if(!$ok) {
+            $this->error("User '$userName' creation went wrong!");
+            return 1;
+        }
+
+        $query = "GRANT ALL PRIVILEGES ON $schemaName.* TO $dbUser IDENTIFIED BY '$userPassword';";
+        $ok = DB::statement($query);
+
+        if(!$ok) {
+            $this->error("Granting privileges to user '$userName' went wrong!");
+            return 1;
+        }
+
         config(["$connection.database" => $schemaName]);
 
         $message = "Database $schemaName created successfully!";
         if(!$ok) {
             $message = "Database $schemaName creation went wrong!";
         }
-        
+
         $this->info($message);
 
         return 0;
