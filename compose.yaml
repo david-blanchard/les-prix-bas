@@ -9,6 +9,15 @@ services:
       - lpb-network
     depends_on:
       - mysql
+      - memcached
+
+  memcached:
+    image: memcached:latest
+    restart: always
+    ports:
+      - "11211:11211"
+    networks:
+      - lpb-network
 
   nginx:
     image: nginx:stable-alpine

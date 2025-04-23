@@ -1,12 +1,20 @@
 FROM php:8.3-fpm-alpine
 
 # Install system dependencies
-RUN apk add --no-cache \
+RUN apk add --no-cache --virtual .build-deps \
     git \
     unzip \
     libzip-dev \
     mariadb-connector-c-dev \
-    && docker-php-ext-install pdo pdo_mysql mysqli zip
+    libmemcached-dev \
+    autoconf \
+    g++ \
+    make \
+    zlib-dev \
+    && pecl install memcached \
+    && docker-php-ext-enable memcached \
+    && docker-php-ext-install pdo pdo_mysql mysqli zip \
+    && apk del .build-deps
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
