@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-alpine
 
-# Install system dependencies
+# Install system dependencies and PHP extensions
 RUN apk add --no-cache --virtual .build-deps \
     git \
     unzip \
@@ -11,9 +11,13 @@ RUN apk add --no-cache --virtual .build-deps \
     g++ \
     make \
     zlib-dev \
+    && apk add --no-cache \
+    libmemcached \
+    cyrus-sasl-dev \
+    libzip \
     && pecl install memcached \
     && docker-php-ext-enable memcached \
-    && docker-php-ext-install pdo pdo_mysql mysqli zip \
+    && docker-php-ext-install pdo pdo_mysql mysqli zip bcmath \
     && apk del .build-deps
 
 # Install Composer

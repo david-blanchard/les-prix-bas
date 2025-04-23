@@ -49,10 +49,13 @@ services:
       - lpb-network
 
   mailer:
-    image: mailhog/mailhog
+    image: axllent/mailpit
     ports:
-      - ":1025"
-      - "8021:8025"
+      - "1025"
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
     networks:
       - lpb-network
     depends_on:
