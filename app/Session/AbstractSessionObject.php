@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Types;
+namespace App\Session;
 
-use App\Interfaces\SessionObjectInterface;
-use App\Traits\ObjectUtilsTrait;
+use App\Utils\ObjectUtilsTrait;
 
 abstract class AbstractSessionObject implements SessionObjectInterface
 {

@@ -4,7 +4,7 @@ namespace App\Factories;
 
 use App\Helpers\CartHelper;
 use App\Interfaces\FactoryInterface;
-use App\Interfaces\SessionObjectInterface;
+use App\Session\SessionObjectInterface;
 
 class SessionObjectFactory implements FactoryInterface
 {

@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-use App\Interfaces\CartInterface;
 use App\Repositories\ProductsRepository;
-use App\Types\AbstractSessionObject;
+use App\Session\AbstractSessionObject;
 
-class CartService extends AbstractSessionObject implements CartInterface
+class CartService extends AbstractSessionObject implements CartServiceInterface
 {
     public function __construct(
         private readonly ProductsRepository $productsRepository
@@ -108,7 +107,7 @@ class CartService extends AbstractSessionObject implements CartInterface
      *
      * @param array $sessioncData state of the cart in session
      * @param array $input data to update the cart with
-     * @return \App\Types\Cart Cart object
+     * @return \App\Session\Cart Cart object
      */
     public function reduce(array $sessioncData, ?array $input = null): void
     {

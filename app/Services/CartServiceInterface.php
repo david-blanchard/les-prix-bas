@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Interfaces\SessionObjectInterface;
+use App\Session\SessionObjectInterface;
 
 interface CartServiceInterface extends SessionObjectInterface
 {
+    public function computeCart() : array;
 
 }

@@ -2,8 +2,6 @@
 
 namespace App\Utils;
 
-use App\Traits\ObjectUtilsTrait;
-
 final class MiscUtils
 {
     use ObjectUtilsTrait;
