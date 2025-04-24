@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Helpers\ProductsHelper;
+use App\Repositories\ProductsRepository;
 use App\Models\Products;
-use Illuminate\Support\Str;
 
 class ProductInfoController extends Controller
 {
@@ -13,8 +12,9 @@ class ProductInfoController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
     }
 
     /**
@@ -24,14 +24,14 @@ class ProductInfoController extends Controller
      */
     public function index()
     {
-        $props = ProductsHelper::getPropertiesFromCacheById(-1);
+        $props = $this->productsRepository->getPropertiesFromCacheById(-1);
         if ($props !== null) {
             return view('product_info', $props);
         }
 
-        $attr = ProductsHelper::getAttributesByProductId();
-        $props = ProductsHelper::attributesToProperties($attr);
-        ProductsHelper::putPropertiesInCacheById(-1, $props);
+        $attr = $this->productsRepository->getAttributesByProductId();
+        $props = $this->productsRepository->attributesToProperties($attr);
+        $this->productsRepository->putPropertiesInCacheById(-1, $props);
 
         return view('product_info', $props);
     }
@@ -39,7 +39,7 @@ class ProductInfoController extends Controller
     public function show($slug)
     {
 
-        $props = ProductsHelper::getPropertiesFromCacheBySlug($slug);
+        $props = $this->productsRepository->getPropertiesFromCacheBySlug($slug);
         if ($props !== null) {
             return view('product_info', $props);
         }
@@ -53,9 +53,9 @@ class ProductInfoController extends Controller
 
         $attr = $product->getAttributes();
 
-        $props = ProductsHelper::attributesToProperties($attr);
+        $props = $this->productsRepository->attributesToProperties($attr);
 
-        ProductsHelper::putPropertiesInCacheBySlug($slug, $props);
+        $this->productsRepository->putPropertiesInCacheBySlug($slug, $props);
 
         return view('product_info', $props);
 

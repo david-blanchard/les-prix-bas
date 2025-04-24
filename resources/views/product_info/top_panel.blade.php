@@ -1,10 +1,10 @@
 @php
-use App\Library\Utils\MiscUtils;
-$hasDiscount = $discount > 0 && $discount < $price;
-$priceTag = $hasDiscount ? $discount : $price;
+    use App\Utils\MiscUtils;
+    $hasDiscount = $discount > 0 && $discount < $price;
+    $priceTag = $hasDiscount ? $discount : $price;
 
-$priceTag = MiscUtils::formatPrice($priceTag);
-$basePrice = MiscUtils::formatPrice($price);
+    $priceTag = MiscUtils::formatPrice($priceTag);
+    $basePrice = MiscUtils::formatPrice($price);
 @endphp
 
 <div class="row mx-1">
@@ -22,11 +22,12 @@ $basePrice = MiscUtils::formatPrice($price);
     </div>
     <div>
         @if($hasDiscount)
-        <h6 id="stroke-price-tag" name="unit-price" class="btn-outline-danger disabled">
+            <h6 id="stroke-price-tag" name="unit-price" class="btn-outline-danger disabled">
                 <del>{{ $basePrice }} <i class="fa fa-euro"></i></del>
-        </h6>
+            </h6>
         @endif
-        <h3 id="price-tag" name="unit-price" data-discount-rate="{{ $discountRate }}" class="btn-outline-success disabled">
+        <h3 id="price-tag" name="unit-price" data-discount-rate="{{ $discountRate }}"
+            class="btn-outline-success disabled">
             {{ $priceTag }}&nbsp;<i class="fa fa-euro"></i>
         </h3>
     </div>

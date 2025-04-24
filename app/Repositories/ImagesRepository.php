@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Library\Helpers;
+namespace App\Repositories;
 
+use App\Models\Images;
 use Illuminate\Support\Facades\DB;
 
-class ImagesHelper
+class ImagesRepository implements ImagesRepositoryInterface
 {
     /**
      * Get the list of images associated with a given product
@@ -25,5 +26,22 @@ class ImagesHelper
         $result = $images->toArray();
 
         return $result;
+    }
+
+    public function getAll(): array
+    {
+        // TODO: Implement getAll() method.
+        return Images::all()->toArray();
+    }
+
+    public function getById($id): ?Images
+    {
+        $imagesTable = DB::table('images');
+        $images = $imagesTable->where('id', $id)->get();
+        if(count($images)) {
+            return $images->first();
+        }
+
+        return null;
     }
 }

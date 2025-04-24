@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Library\Types;
+namespace App\Services;
 
-use App\Library\Helpers\ProductsHelper;
-use App\Library\Interfaces\CartInterface;
+use App\Repositories\ProductsRepository;
+use App\Session\AbstractSessionObject;
 
-class Cart extends AbstractSessionObject implements CartInterface
+class CartService extends AbstractSessionObject implements CartServiceInterface
 {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
+    }
 
-    public function type(): string
+    public static function type(): string
     {
         return 'Cart';
     }
 
     /**
-     * Compute the total sum of the cart 
+     * Compute the total sum of the cart
      * accordingly to the product prices and quantities
      *
      * @return array optimized cart form
@@ -32,8 +36,8 @@ class Cart extends AbstractSessionObject implements CartInterface
             if (is_array($quantity)) {
                 continue;
             }
-            $attr = ProductsHelper::getAttributesByProductId($productId);
-            $props = ProductsHelper::attributesToProperties($attr);
+            $attr = $this->productsRepository->getAttributesByProductId($productId);
+            $props = $this->productsRepository->attributesToProperties($attr);
             $price = $props['discount'] ?: floatval($props['price']);
 
             $numberOfProducts += $quantity;
@@ -49,7 +53,7 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
     public function prepare(?array $data = null): void
-    { 
+    {
         $this->reduce($data);
     }
 
@@ -93,9 +97,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      */
     public function prepareViewFields(): array
     {
-        $result = $this->computeCart();
-
-        return $result;
+        return $this->computeCart();
     }
 
     /**
@@ -105,7 +107,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      *
      * @param array $sessioncData state of the cart in session
      * @param array $input data to update the cart with
-     * @return Cart Cart object
+     * @return \App\Session\Cart Cart object
      */
     public function reduce(array $sessioncData, ?array $input = null): void
     {
@@ -149,5 +151,5 @@ class Cart extends AbstractSessionObject implements CartInterface
             ]
         ];
     }
-    
+
 }

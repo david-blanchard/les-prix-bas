@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\Interfaces;
+namespace App\Utils;
 
 interface ObjectUtilsInterface
 {

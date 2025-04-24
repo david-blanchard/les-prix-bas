@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Library\Factories;
+namespace App\Factories;
 
-use App\Library\Interfaces\FactoryInterface;
-use App\Library\Interfaces\SessionObjectInterface;
-use App\Library\Types\Cart;
+use App\Helpers\CartHelper;
+use App\Interfaces\FactoryInterface;
+use App\Session\SessionObjectInterface;
 
 class SessionObjectFactory implements FactoryInterface
 {
@@ -17,12 +17,12 @@ class SessionObjectFactory implements FactoryInterface
             return $result;
         }
 
-        if( $data["type"] === 'Cart') {
-            $result = new Cart;
+        if( $data["type"] === CartHelper::type()) {
+            $result = CartHelper::useService();
         }
 
         return $result;
 
     }
-    
+
 }

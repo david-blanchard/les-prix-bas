@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Factories\SessionObjectFactory;
+use App\Factories\SessionObjectFactory;
 use App\Models\Session;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;

@@ -1,14 +1,35 @@
 <?php
 
-namespace App\Library\Helpers;
+namespace App\Repositories;
 
-use App\Library\Utils\MiscUtils;
 use App\Models\Products;
+use App\Utils\MiscUtils;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class ProductsHelper
+class ProductsRepository implements ProductsRepositoryInterface
 {
+
+    public function __construct(
+        private readonly BrandsRepository $brandsRepository,
+        private readonly ImagesRepository $imagesRepository,
+    ) {
+    }
+
+    public function getAll(): array
+    {
+        return Products::all()->toArray();
+    }
+
+    public function getById($id): ?Products
+    {
+        $products = Products::where('id', $id)->get();
+        if(count($products)) {
+            return $products->first();
+        }
+
+        return null;
+    }
 
     /**
      * Retrieve the values of a given product
@@ -16,7 +37,7 @@ class ProductsHelper
      * @param integer $productId
      * @return array
      */
-    static function getAttributesByProductId(?int $productId = null): array
+    function getAttributesByProductId(?int $productId = null): array
     {
         $result = [];
         if($productId === null) {
@@ -35,17 +56,17 @@ class ProductsHelper
      * @param array $props
      * @return array
      */
-    public static function attributesToProperties(array $props): array
+    public function attributesToProperties(array $props): array
     {
-        $discount = ProductsHelper::getProductDiscountById($props['id']);
-        $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
+        $discount = $this->getProductDiscountById($props['id']);
+        $props['brand'] = $this->brandsRepository->getBrandNameById($props['brand']);
         $props['discountRate'] = $discount;
-        $props['discount'] = ProductsHelper::computeDiscount($props['price'], $discount);
+        $props['discount'] = $this->computeDiscount($props['price'], $discount);
 
         $props['featuresCaption'] = 'Information complémentaires';
-        $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
+        $props['features'] = $this->grabMoreInfo($props['more_infos']);
 
-        $images = ImagesHelper::getImagesByProductId($props['id']);
+        $images = $this->imagesRepository->getImagesByProductId($props['id']);
         $props['images'] = $images;
 
         return $props;
@@ -57,13 +78,13 @@ class ProductsHelper
      * @param string $phrase
      * @return array
      */
-    public static function grabMoreInfo(?string $phrase): array
+    public function grabMoreInfo(?string $phrase): array
     {
         $result = [];
 
         if($phrase === null) {
             return $result;
-        } 
+        }
 
         $result = explode(';', $phrase);
 
@@ -76,7 +97,7 @@ class ProductsHelper
      * @param integer $productId
      * @return integer
      */
-    public static function getProductDiscountById(int $productId): int
+    public function getProductDiscountById(int $productId): int
     {
         $result = 0.0;
 
@@ -96,12 +117,12 @@ class ProductsHelper
 
     /**
      * Get the discount price for the given amount and percent rate
-     * 
-     * @param float|string $price 
-     * @param int $percent 
-     * @return float 
+     *
+     * @param float|string $price
+     * @param int $percent
+     * @return float
      */
-    public static function computeDiscount(float|string $price, int $percent): float
+    public function computeDiscount(float|string $price, int $percent): float
     {
         $result = 0.00;
 
@@ -121,7 +142,7 @@ class ProductsHelper
      * @param Products $product
      * @return void
      */
-    public static function deletePropertiesFromCache(Products $product) : void
+    public function deletePropertiesFromCache(Products $product) : void
     {
         self::deletePropertiesFromCacheById($product->id);
     }
@@ -132,7 +153,7 @@ class ProductsHelper
      * @param integer $productId ID of the product
      * @return void
      */
-    public static function deletePropertiesFromCacheById(int $productId) : void
+    public function deletePropertiesFromCacheById(int $productId) : void
     {
         if(Cache::has("product$productId")) {
             Cache::pull("product$productId");
@@ -145,13 +166,13 @@ class ProductsHelper
      * @param string $slug Free form of the product name
      * @return array|null $properties Values to be set in product page view
      */
-    public static function getPropertiesFromCacheBySlug(string $slug): ?array
+    public function getPropertiesFromCacheBySlug(string $slug): ?array
     {
         $result = null;
 
         $productId = Cache::has("product$slug") ? Cache::get("product$slug") : null;
         if($productId !== null) {
-            $result = ProductsHelper::getPropertiesFromCacheById($productId);
+            $result = $this->getPropertiesFromCacheById($productId);
         }
 
         return $result;
@@ -164,23 +185,23 @@ class ProductsHelper
      * @param array $properties Values to be set in product page view
      * @return void
      */
-    public static function putPropertiesInCacheBySlug(string $slug, array $properties): void
+    public function putPropertiesInCacheBySlug(string $slug, array $properties): void
     {
         if(!Cache::has("product$slug"))
         {
             $id = $properties['id'];
             Cache::put("product$slug", $id);
-            ProductsHelper::putPropertiesInCacheById($id, $properties);
+            $this->putPropertiesInCacheById($id, $properties);
         }
     }
-    
+
     /**
      * Retrieve the product page properties from the cache by ID
      *
      * @param integer $id ID of the product
      * @return array|null Values to be set in product page view
      */
-    public static function getPropertiesFromCacheById(int $id): ?array
+    public function getPropertiesFromCacheById(int $id): ?array
     {
         $product = Cache::has("product$id") ? Cache::get("product$id") : null;
 
@@ -194,11 +215,12 @@ class ProductsHelper
      * @param array $properties Values to be set in product page view
      * @return void
      */
-    public static function putPropertiesInCacheById(int $id, array $properties): void
+    public function putPropertiesInCacheById(int $id, array $properties): void
     {
         if(!Cache::has("product$id"))
         {
             Cache::put("product$id", $properties);
         }
     }
+
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Helpers\BrandsHelper;
-use App\Library\Helpers\ImagesHelper;
-use App\Library\Helpers\ProductsHelper;
+use App\Repositories\BrandsRepository;
+use App\Repositories\ImagesRepository;
+use App\Repositories\ProductsRepository;
 use App\Models\Images;
 use App\Models\ProductImages;
 use App\Models\Products;
@@ -12,15 +12,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductImagesController extends Controller
 {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository,
+        private readonly BrandsRepository $brandsRepository,
+        private readonly ImagesRepository $imagesRepository,
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View|RedirectResponse
     {
         $user = Auth::user();
         $products = DB::table('products')->paginate(20);
@@ -38,12 +47,12 @@ class ProductImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Products $product)
+    public function create(Products $product): View
     {
         $productId = $product['id'];
         $productName = $product['name'];
-        $brand = BrandsHelper::getBrandNameById($product['brand']);
-        $associatedImages = ImagesHelper::getImagesByProductId($productId);
+        $brand = $this->brandsRepository->getBrandNameById($product['brand']);
+        $associatedImages = $this->imagesRepository->getImagesByProductId($productId);
 
         return View('admin.product_images.create', [
             'productId' => $productId,
@@ -58,16 +67,16 @@ class ProductImagesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $productId = $request->input('product');
         ProductImages::create([
             'product' => $productId,
             'image' => $request->input('image'),
         ]);
-        ProductsHelper::deletePropertiesFromCacheById($productId);
+        $this->productsRepository->deletePropertiesFromCacheById($productId);
 
         return redirect()->route('product_images.create', $productId);
     }

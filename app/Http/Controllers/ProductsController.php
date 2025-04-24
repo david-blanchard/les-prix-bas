@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\BrandsRepository;
+use App\Repositories\ProductsRepository;
 use App\Http\Requests\ProductsRequest;
-use App\Library\Helpers\BrandsHelper;
-use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductsController extends Controller
 {
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository,
+        private readonly BrandsRepository $brandsRepository,
+    ) {
         $this->middleware('auth');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(): View
     {
         $user = Auth::user();
         $products = DB::table('products')->paginate(env('PAGINATION', 8));
@@ -39,11 +43,11 @@ class ProductsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        $brands = BrandsHelper::getAllFromCache();
+        $brands = $this->brandsRepository->getAllFromCache();
 
         return view('admin.products.create', [
             'brands' => $brands,
@@ -53,13 +57,13 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProductsRequest $request
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ProductsRequest $request)
+    public function store(ProductsRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        
+
         Products::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -74,8 +78,8 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
+     * @param Products $products
+     * @return void
      */
     public function show(Products $products)
     {
@@ -85,12 +89,12 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
+     * @param Products $product
+     * @return View
      */
-    public function edit(Products $product)
+    public function edit(Products $product): View
     {
-        $brands = BrandsHelper::getAllFromCache();
+        $brands = $this->brandsRepository->getAllFromCache();
         return view('admin.products.edit', [
             'product' => $product,
             'brands' => $brands,
@@ -100,11 +104,11 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
+     * @param ProductsRequest $request
+     * @param Products $product
+     * @return RedirectResponse
      */
-    public function update(Request $request, Products $product)
+    public function update(Request $request, Products $product): RedirectResponse
     {
         $product->name = $request->input("name");
         $product->description = $request->input("description");
@@ -115,7 +119,7 @@ class ProductsController extends Controller
 
         // Delete product properties from the cache
         // since we just updated them
-        ProductsHelper::deletePropertiesFromCacheById($product->id);
+        $this->productsRepository->deletePropertiesFromCacheById($product->id);
 
         return redirect()->route('products.index')->with('success', "Le produit a bien été mis à jour");
 
@@ -124,13 +128,13 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
+     * @param Products $product
+     * @return RedirectResponse
      */
-    public function destroy(Products $product)
+    public function destroy(Products $product): RedirectResponse
     {
         // Delete product properties from the cache
-        ProductsHelper::deletePropertiesFromCacheById($product->id);
+        $this->productsRepository->deletePropertiesFromCacheById($product->id);
         // before actually deleting it from the database
         $product->delete();
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Library\Interfaces;
+namespace App\Session;
 
 interface SessionObjectInterface
 {
-    public function type(): string;
+    public static function type(): string;
     public function items() : array;
     public function add(array $item);
     public function remove(int|string $key): bool;

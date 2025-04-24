@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\Traits;
+namespace App\Utils;
 
 trait ObjectUtilsTrait
 {
