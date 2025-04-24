@@ -1,7 +1,7 @@
 @php
-    use App\Types\Cart;use App\Utils\MiscUtils;
+    use App\Utils\MiscUtils;
 
-    $cart = new Cart;
+    $cart = \App\Helpers\CartHelper::useService();
     $fields = $cart->prepareViewFields();
     $total = MiscUtils::formatPrice($fields['total']);
     $quantity = $fields['quantity'];

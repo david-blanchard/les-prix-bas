@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\DB;
 class ProductsController extends Controller
 {
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
         $this->middleware('auth');
     }
 
@@ -102,7 +103,7 @@ class ProductsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Products $product)
     {
@@ -115,7 +116,7 @@ class ProductsController extends Controller
 
         // Delete product properties from the cache
         // since we just updated them
-        ProductsRepository::deletePropertiesFromCacheById($product->id);
+        $this->productsRepository->deletePropertiesFromCacheById($product->id);
 
         return redirect()->route('products.index')->with('success', "Le produit a bien été mis à jour");
 
@@ -130,7 +131,7 @@ class ProductsController extends Controller
     public function destroy(Products $product)
     {
         // Delete product properties from the cache
-        ProductsRepository::deletePropertiesFromCacheById($product->id);
+        $this->productsRepository->deletePropertiesFromCacheById($product->id);
         // before actually deleting it from the database
         $product->delete();
 

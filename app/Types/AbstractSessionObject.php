@@ -13,7 +13,7 @@ abstract class AbstractSessionObject implements SessionObjectInterface
 
     abstract public function prepareViewFields(): array;
 
-    abstract public function type(): string;
+    abstract static public function type(): string;
 
     abstract public function prepare(?array $data = null): void;
 

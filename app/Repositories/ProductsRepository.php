@@ -28,7 +28,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param integer $productId
      * @return array
      */
-    static function getAttributesByProductId(?int $productId = null): array
+    function getAttributesByProductId(?int $productId = null): array
     {
         $result = [];
         if($productId === null) {
@@ -47,15 +47,15 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param array $props
      * @return array
      */
-    public static function attributesToProperties(array $props): array
+    public function attributesToProperties(array $props): array
     {
-        $discount = ProductsRepository::getProductDiscountById($props['id']);
+        $discount = $this->getProductDiscountById($props['id']);
         $props['brand'] = BrandsRepository::getBrandNameById($props['brand']);
         $props['discountRate'] = $discount;
-        $props['discount'] = ProductsRepository::computeDiscount($props['price'], $discount);
+        $props['discount'] = $this->computeDiscount($props['price'], $discount);
 
         $props['featuresCaption'] = 'Information complémentaires';
-        $props['features'] = ProductsRepository::grabMoreInfo($props['more_infos']);
+        $props['features'] = $this->grabMoreInfo($props['more_infos']);
 
         $images = ImagesRepository::getImagesByProductId($props['id']);
         $props['images'] = $images;
@@ -69,7 +69,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param string $phrase
      * @return array
      */
-    public static function grabMoreInfo(?string $phrase): array
+    public function grabMoreInfo(?string $phrase): array
     {
         $result = [];
 
@@ -88,7 +88,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param integer $productId
      * @return integer
      */
-    public static function getProductDiscountById(int $productId): int
+    public function getProductDiscountById(int $productId): int
     {
         $result = 0.0;
 
@@ -113,7 +113,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param int $percent
      * @return float
      */
-    public static function computeDiscount(float|string $price, int $percent): float
+    public function computeDiscount(float|string $price, int $percent): float
     {
         $result = 0.00;
 
@@ -133,7 +133,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param Products $product
      * @return void
      */
-    public static function deletePropertiesFromCache(Products $product) : void
+    public function deletePropertiesFromCache(Products $product) : void
     {
         self::deletePropertiesFromCacheById($product->id);
     }
@@ -144,7 +144,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param integer $productId ID of the product
      * @return void
      */
-    public static function deletePropertiesFromCacheById(int $productId) : void
+    public function deletePropertiesFromCacheById(int $productId) : void
     {
         if(Cache::has("product$productId")) {
             Cache::pull("product$productId");
@@ -157,13 +157,13 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param string $slug Free form of the product name
      * @return array|null $properties Values to be set in product page view
      */
-    public static function getPropertiesFromCacheBySlug(string $slug): ?array
+    public function getPropertiesFromCacheBySlug(string $slug): ?array
     {
         $result = null;
 
         $productId = Cache::has("product$slug") ? Cache::get("product$slug") : null;
         if($productId !== null) {
-            $result = ProductsRepository::getPropertiesFromCacheById($productId);
+            $result = $this->getPropertiesFromCacheById($productId);
         }
 
         return $result;
@@ -176,13 +176,13 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param array $properties Values to be set in product page view
      * @return void
      */
-    public static function putPropertiesInCacheBySlug(string $slug, array $properties): void
+    public function putPropertiesInCacheBySlug(string $slug, array $properties): void
     {
         if(!Cache::has("product$slug"))
         {
             $id = $properties['id'];
             Cache::put("product$slug", $id);
-            ProductsRepository::putPropertiesInCacheById($id, $properties);
+            $this->putPropertiesInCacheById($id, $properties);
         }
     }
 
@@ -192,7 +192,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param integer $id ID of the product
      * @return array|null Values to be set in product page view
      */
-    public static function getPropertiesFromCacheById(int $id): ?array
+    public function getPropertiesFromCacheById(int $id): ?array
     {
         $product = Cache::has("product$id") ? Cache::get("product$id") : null;
 
@@ -206,7 +206,7 @@ class ProductsRepository implements ProductsRepositoryInterface
      * @param array $properties Values to be set in product page view
      * @return void
      */
-    public static function putPropertiesInCacheById(int $id, array $properties): void
+    public function putPropertiesInCacheById(int $id, array $properties): void
     {
         if(!Cache::has("product$id"))
         {

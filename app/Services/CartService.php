@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Types;
+namespace App\Services;
 
-use App\Repositories\ProductsRepository;
 use App\Interfaces\CartInterface;
+use App\Repositories\ProductsRepository;
+use App\Types\AbstractSessionObject;
 
-class Cart extends AbstractSessionObject implements CartInterface
+class CartService extends AbstractSessionObject implements CartInterface
 {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
+    }
 
-    public function type(): string
+    public static function type(): string
     {
         return 'Cart';
     }
@@ -32,8 +37,8 @@ class Cart extends AbstractSessionObject implements CartInterface
             if (is_array($quantity)) {
                 continue;
             }
-            $attr = ProductsRepository::getAttributesByProductId($productId);
-            $props = ProductsRepository::attributesToProperties($attr);
+            $attr = $this->productsRepository->getAttributesByProductId($productId);
+            $props = $this->productsRepository->attributesToProperties($attr);
             $price = $props['discount'] ?: floatval($props['price']);
 
             $numberOfProducts += $quantity;
@@ -93,9 +98,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      */
     public function prepareViewFields(): array
     {
-        $result = $this->computeCart();
-
-        return $result;
+        return $this->computeCart();
     }
 
     /**
@@ -105,7 +108,7 @@ class Cart extends AbstractSessionObject implements CartInterface
      *
      * @param array $sessioncData state of the cart in session
      * @param array $input data to update the cart with
-     * @return Cart Cart object
+     * @return \App\Types\Cart Cart object
      */
     public function reduce(array $sessioncData, ?array $input = null): void
     {

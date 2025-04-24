@@ -2,9 +2,9 @@
 
 namespace App\Factories;
 
+use App\Helpers\CartHelper;
 use App\Interfaces\FactoryInterface;
 use App\Interfaces\SessionObjectInterface;
-use App\Types\Cart;
 
 class SessionObjectFactory implements FactoryInterface
 {
@@ -17,8 +17,8 @@ class SessionObjectFactory implements FactoryInterface
             return $result;
         }
 
-        if( $data["type"] === 'Cart') {
-            $result = new Cart;
+        if( $data["type"] === CartHelper::type()) {
+            $result = CartHelper::useService();
         }
 
         return $result;

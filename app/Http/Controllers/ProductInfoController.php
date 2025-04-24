@@ -12,8 +12,9 @@ class ProductInfoController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
     }
 
     /**
@@ -23,14 +24,14 @@ class ProductInfoController extends Controller
      */
     public function index()
     {
-        $props = ProductsRepository::getPropertiesFromCacheById(-1);
+        $props = $this->productsRepository->getPropertiesFromCacheById(-1);
         if ($props !== null) {
             return view('product_info', $props);
         }
 
-        $attr = ProductsRepository::getAttributesByProductId();
-        $props = ProductsRepository::attributesToProperties($attr);
-        ProductsRepository::putPropertiesInCacheById(-1, $props);
+        $attr = $this->productsRepository->getAttributesByProductId();
+        $props = $this->productsRepository->attributesToProperties($attr);
+        $this->productsRepository->putPropertiesInCacheById(-1, $props);
 
         return view('product_info', $props);
     }
@@ -38,7 +39,7 @@ class ProductInfoController extends Controller
     public function show($slug)
     {
 
-        $props = ProductsRepository::getPropertiesFromCacheBySlug($slug);
+        $props = $this->productsRepository->getPropertiesFromCacheBySlug($slug);
         if ($props !== null) {
             return view('product_info', $props);
         }
@@ -52,9 +53,9 @@ class ProductInfoController extends Controller
 
         $attr = $product->getAttributes();
 
-        $props = ProductsRepository::attributesToProperties($attr);
+        $props = $this->productsRepository->attributesToProperties($attr);
 
-        ProductsRepository::putPropertiesInCacheBySlug($slug, $props);
+        $this->productsRepository->putPropertiesInCacheBySlug($slug, $props);
 
         return view('product_info', $props);
 

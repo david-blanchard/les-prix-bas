@@ -12,15 +12,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductImagesController extends Controller
 {
+    public function __construct(
+        private readonly ProductsRepository $productsRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $user = Auth::user();
         $products = DB::table('products')->paginate(20);
@@ -38,7 +45,7 @@ class ProductImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Products $product)
+    public function create(Products $product): View
     {
         $productId = $product['id'];
         $productName = $product['name'];
@@ -58,16 +65,16 @@ class ProductImagesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $productId = $request->input('product');
         ProductImages::create([
             'product' => $productId,
             'image' => $request->input('image'),
         ]);
-        ProductsRepository::deletePropertiesFromCacheById($productId);
+        $this->productsRepository->deletePropertiesFromCacheById($productId);
 
         return redirect()->route('product_images.create', $productId);
     }
