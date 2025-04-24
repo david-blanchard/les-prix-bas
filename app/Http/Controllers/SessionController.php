@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Factories\SessionObjectFactory;
 use App\Models\Session;
-use Facade\FlareClient\Http\Response;
+use App\Session\SessionObjectFactory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -35,18 +35,16 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function retrieve(Request $request)
+    public function retrieve(Request $request, SessionObjectFactory $sessionObjectFactory): JsonResponse
     {
         $input = $request->input();
 
-        $sessionObject = SessionObjectFactory::create($input);
+        $sessionObject = $sessionObjectFactory->create($input);
         $sessionData = $sessionObject->retrieve();
         $sessionObject->prepare($sessionData);
         $data = $sessionObject->prepareViewFields();
 
-        $response = response()->json($data);
-
-        return $response;
+        return response()->json($data);
     }
 
     /**
@@ -55,17 +53,15 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, SessionObjectFactory $sessionObjectFactory): JsonResponse
     {
         $input = $request->input();
 
-        $sessionObject = SessionObjectFactory::create($input);
+        $sessionObject = $sessionObjectFactory->create($input);
         $sessionObject->store($input);
         $data = $sessionObject->prepareViewFields();
 
-        $response = response()->json($data);
-
-        return $response;
+        return response()->json($data);
     }
 
     /**
