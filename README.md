@@ -8,21 +8,21 @@
 
 Vous avez un serveur de base de données **MySQL** fonctionnel et accessible sur localhost.
 
-Vous avez **PHP** en version **8** minimum ainsi que **Composer**.
+Vous avez **PHP** en version **8.3** minimum ainsi que **Composer**.
 
 Votre environnement de développement est sous **Linux**, **MacOS** ou **Windows WSL 2**.
 
-Le projet est développé à l'aide de **Laravel 8**.
+Le projet est développé à l'aide de **Laravel 12.9**.
 
 Le cache applicatif est géré par **Memcached**. Le serveur Memcached doit être installé et mis en service. L'extension **php-memcached** doit être installée.
 
-Dans l'alternative, vous pouver utiliser l'image Docker fournie qui regroupe tous les services nécessaires.
+Dans l'alternative, vous pouvez utiliser l'image Docker fournie qui regroupe tous les services nécessaires.
 
 ```zsh
 docker compose up -d --build --wait
 ```
 
-Si vous utilisez Docker, toutes les commandes `arisan` et `composer` doivent être précédées de `docker-compose exec php` pour être exécutées dans le conteneur.
+Si vous utilisez Docker, toutes les commandes `arisan` et `composer` doivent être précédées de `docker compose exec php` pour être exécutées dans le container.
 
 ### 1.2 - Installation
 
