@@ -5,7 +5,7 @@ namespace App\Repositories;
 interface RepositoryInterface
 {
 
-    public function getAll();
+    public function getAll(): array;
 
-    public function getById($id);
+    public function getById($id): mixed;
 }

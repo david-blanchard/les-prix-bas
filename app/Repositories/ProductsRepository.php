@@ -10,15 +10,24 @@ use Illuminate\Support\Facades\DB;
 class ProductsRepository implements ProductsRepositoryInterface
 {
 
+    public function __construct(
+        private readonly BrandsRepository $brandsRepository,
+        private readonly ImagesRepository $imagesRepository,
+    ) {
+    }
+
     public function getAll(): array
     {
-        // TODO: Implement getAll() method.
-        return [];
+        return Products::all()->toArray();
     }
 
     public function getById($id): ?Products
     {
-        // TODO: Implement getById() method.
+        $products = Products::where('id', $id)->get();
+        if(count($products)) {
+            return $products->first();
+        }
+
         return null;
     }
 
@@ -50,14 +59,14 @@ class ProductsRepository implements ProductsRepositoryInterface
     public function attributesToProperties(array $props): array
     {
         $discount = $this->getProductDiscountById($props['id']);
-        $props['brand'] = BrandsRepository::getBrandNameById($props['brand']);
+        $props['brand'] = $this->brandsRepository->getBrandNameById($props['brand']);
         $props['discountRate'] = $discount;
         $props['discount'] = $this->computeDiscount($props['price'], $discount);
 
         $props['featuresCaption'] = 'Information complémentaires';
         $props['features'] = $this->grabMoreInfo($props['more_infos']);
 
-        $images = ImagesRepository::getImagesByProductId($props['id']);
+        $images = $this->imagesRepository->getImagesByProductId($props['id']);
         $props['images'] = $images;
 
         return $props;

@@ -85,7 +85,9 @@ class ProductModelTest extends TestCase
             'image' => 12,
         ]);
 
-        $images = ImagesRepository::getImagesByProductId($id);
+        $imagesRepository = new ImagesRepository();
+
+        $images = $imagesRepository->getImagesByProductId($id);
 
         $this->assertIsArray($images);
     }

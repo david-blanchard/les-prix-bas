@@ -18,7 +18,9 @@ use Illuminate\Http\RedirectResponse;
 class ProductImagesController extends Controller
 {
     public function __construct(
-        private readonly ProductsRepository $productsRepository
+        private readonly ProductsRepository $productsRepository,
+        private readonly BrandsRepository $brandsRepository,
+        private readonly ImagesRepository $imagesRepository,
     ) {
     }
 
@@ -27,7 +29,7 @@ class ProductImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
         $user = Auth::user();
         $products = DB::table('products')->paginate(20);
@@ -49,8 +51,8 @@ class ProductImagesController extends Controller
     {
         $productId = $product['id'];
         $productName = $product['name'];
-        $brand = BrandsRepository::getBrandNameById($product['brand']);
-        $associatedImages = ImagesRepository::getImagesByProductId($productId);
+        $brand = $this->brandsRepository->getBrandNameById($product['brand']);
+        $associatedImages = $this->imagesRepository->getImagesByProductId($productId);
 
         return View('admin.product_images.create', [
             'productId' => $productId,
