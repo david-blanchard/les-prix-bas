@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\BrandsRepository;
+use App\Repositories\ProductsRepository;
 use App\Http\Requests\ProductsRequest;
-use App\Library\Helpers\BrandsHelper;
-use App\Library\Helpers\ProductsHelper;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,7 +43,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $brands = BrandsHelper::getAllFromCache();
+        $brands = BrandsRepository::getAllFromCache();
 
         return view('admin.products.create', [
             'brands' => $brands,
@@ -59,7 +59,7 @@ class ProductsController extends Controller
     public function store(ProductsRequest $request)
     {
         $validated = $request->validated();
-        
+
         Products::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -90,7 +90,7 @@ class ProductsController extends Controller
      */
     public function edit(Products $product)
     {
-        $brands = BrandsHelper::getAllFromCache();
+        $brands = BrandsRepository::getAllFromCache();
         return view('admin.products.edit', [
             'product' => $product,
             'brands' => $brands,
@@ -115,7 +115,7 @@ class ProductsController extends Controller
 
         // Delete product properties from the cache
         // since we just updated them
-        ProductsHelper::deletePropertiesFromCacheById($product->id);
+        ProductsRepository::deletePropertiesFromCacheById($product->id);
 
         return redirect()->route('products.index')->with('success', "Le produit a bien été mis à jour");
 
@@ -130,7 +130,7 @@ class ProductsController extends Controller
     public function destroy(Products $product)
     {
         // Delete product properties from the cache
-        ProductsHelper::deletePropertiesFromCacheById($product->id);
+        ProductsRepository::deletePropertiesFromCacheById($product->id);
         // before actually deleting it from the database
         $product->delete();
 

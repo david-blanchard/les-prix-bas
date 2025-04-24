@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Library\Factories;
+namespace App\Factories;
 
-use App\Library\Interfaces\FactoryInterface;
-use App\Library\Interfaces\SessionObjectInterface;
-use App\Library\Types\Cart;
+use App\Interfaces\FactoryInterface;
+use App\Interfaces\SessionObjectInterface;
+use App\Types\Cart;
 
 class SessionObjectFactory implements FactoryInterface
 {
@@ -24,5 +24,5 @@ class SessionObjectFactory implements FactoryInterface
         return $result;
 
     }
-    
+
 }

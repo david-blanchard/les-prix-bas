@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Helpers\BrandsHelper;
-use App\Library\Helpers\ImagesHelper;
-use App\Library\Helpers\ProductsHelper;
+use App\Repositories\BrandsRepository;
+use App\Repositories\ImagesRepository;
+use App\Repositories\ProductsRepository;
 use App\Models\Images;
 use App\Models\ProductImages;
 use App\Models\Products;
@@ -42,8 +42,8 @@ class ProductImagesController extends Controller
     {
         $productId = $product['id'];
         $productName = $product['name'];
-        $brand = BrandsHelper::getBrandNameById($product['brand']);
-        $associatedImages = ImagesHelper::getImagesByProductId($productId);
+        $brand = BrandsRepository::getBrandNameById($product['brand']);
+        $associatedImages = ImagesRepository::getImagesByProductId($productId);
 
         return View('admin.product_images.create', [
             'productId' => $productId,
@@ -67,7 +67,7 @@ class ProductImagesController extends Controller
             'product' => $productId,
             'image' => $request->input('image'),
         ]);
-        ProductsHelper::deletePropertiesFromCacheById($productId);
+        ProductsRepository::deletePropertiesFromCacheById($productId);
 
         return redirect()->route('product_images.create', $productId);
     }

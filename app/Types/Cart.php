@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Library\Types;
+namespace App\Types;
 
-use App\Library\Helpers\ProductsHelper;
-use App\Library\Interfaces\CartInterface;
+use App\Repositories\ProductsRepository;
+use App\Interfaces\CartInterface;
 
 class Cart extends AbstractSessionObject implements CartInterface
 {
@@ -14,7 +14,7 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
     /**
-     * Compute the total sum of the cart 
+     * Compute the total sum of the cart
      * accordingly to the product prices and quantities
      *
      * @return array optimized cart form
@@ -32,8 +32,8 @@ class Cart extends AbstractSessionObject implements CartInterface
             if (is_array($quantity)) {
                 continue;
             }
-            $attr = ProductsHelper::getAttributesByProductId($productId);
-            $props = ProductsHelper::attributesToProperties($attr);
+            $attr = ProductsRepository::getAttributesByProductId($productId);
+            $props = ProductsRepository::attributesToProperties($attr);
             $price = $props['discount'] ?: floatval($props['price']);
 
             $numberOfProducts += $quantity;
@@ -49,7 +49,7 @@ class Cart extends AbstractSessionObject implements CartInterface
     }
 
     public function prepare(?array $data = null): void
-    { 
+    {
         $this->reduce($data);
     }
 
@@ -149,5 +149,5 @@ class Cart extends AbstractSessionObject implements CartInterface
             ]
         ];
     }
-    
+
 }

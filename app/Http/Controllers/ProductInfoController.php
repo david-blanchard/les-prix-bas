@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Library\Helpers\ProductsHelper;
+use App\Repositories\ProductsRepository;
 use App\Models\Products;
-use Illuminate\Support\Str;
 
 class ProductInfoController extends Controller
 {
@@ -24,14 +23,14 @@ class ProductInfoController extends Controller
      */
     public function index()
     {
-        $props = ProductsHelper::getPropertiesFromCacheById(-1);
+        $props = ProductsRepository::getPropertiesFromCacheById(-1);
         if ($props !== null) {
             return view('product_info', $props);
         }
 
-        $attr = ProductsHelper::getAttributesByProductId();
-        $props = ProductsHelper::attributesToProperties($attr);
-        ProductsHelper::putPropertiesInCacheById(-1, $props);
+        $attr = ProductsRepository::getAttributesByProductId();
+        $props = ProductsRepository::attributesToProperties($attr);
+        ProductsRepository::putPropertiesInCacheById(-1, $props);
 
         return view('product_info', $props);
     }
@@ -39,7 +38,7 @@ class ProductInfoController extends Controller
     public function show($slug)
     {
 
-        $props = ProductsHelper::getPropertiesFromCacheBySlug($slug);
+        $props = ProductsRepository::getPropertiesFromCacheBySlug($slug);
         if ($props !== null) {
             return view('product_info', $props);
         }
@@ -53,9 +52,9 @@ class ProductInfoController extends Controller
 
         $attr = $product->getAttributes();
 
-        $props = ProductsHelper::attributesToProperties($attr);
+        $props = ProductsRepository::attributesToProperties($attr);
 
-        ProductsHelper::putPropertiesInCacheBySlug($slug, $props);
+        ProductsRepository::putPropertiesInCacheBySlug($slug, $props);
 
         return view('product_info', $props);
 

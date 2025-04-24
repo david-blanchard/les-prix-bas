@@ -1,6 +1,5 @@
 @php
-    use App\Library\Types\Cart;
-    use App\Library\Utils\MiscUtils;
+    use App\Types\Cart;use App\Utils\MiscUtils;
 
     $cart = new Cart;
     $fields = $cart->prepareViewFields();

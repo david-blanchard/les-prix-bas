@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Library\Helpers;
+namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 
-class ImagesHelper
+class ImagesRepository
 {
     /**
      * Get the list of images associated with a given product

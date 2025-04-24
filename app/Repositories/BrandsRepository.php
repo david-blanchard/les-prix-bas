@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Library\Helpers;
+namespace App\Repositories;
 
 use App\Models\Brands;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class BrandsHelper
+class BrandsRepository
 {
 
     /**
@@ -41,7 +41,7 @@ class BrandsHelper
             $brands = Brands::all();
             Cache::put('brands', $brands);
         }
-        
+
         return $brands;
     }
 

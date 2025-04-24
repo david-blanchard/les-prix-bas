@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Library\Types;
+namespace App\Types;
 
-use App\Library\Interfaces\SessionObjectInterface;
-use App\Library\Traits\ObjectUtilsTrait;
+use App\Interfaces\SessionObjectInterface;
+use App\Traits\ObjectUtilsTrait;
 
 abstract class AbstractSessionObject implements SessionObjectInterface
 {
     use ObjectUtilsTrait;
-    
+
     private $list = [];
 
     abstract public function prepareViewFields(): array;
@@ -27,7 +27,7 @@ abstract class AbstractSessionObject implements SessionObjectInterface
         $key = key($item);
         $value = $item[$key];
 
-        $oldValue = isset($this->list[$key]) ? $this->list[$key] : null; 
+        $oldValue = isset($this->list[$key]) ? $this->list[$key] : null;
 
         if ($oldValue !== null && is_numeric($oldValue) && is_numeric($value)) {
             $value = $oldValue + $value;

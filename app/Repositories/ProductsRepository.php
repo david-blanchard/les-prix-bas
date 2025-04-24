@@ -1,14 +1,26 @@
 <?php
 
-namespace App\Library\Helpers;
+namespace App\Repositories;
 
-use App\Library\Utils\MiscUtils;
 use App\Models\Products;
+use App\Utils\MiscUtils;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class ProductsHelper
+class ProductsRepository implements ProductsRepositoryInterface
 {
+
+    public function getAll(): array
+    {
+        // TODO: Implement getAll() method.
+        return [];
+    }
+
+    public function getById($id): ?Products
+    {
+        // TODO: Implement getById() method.
+        return null;
+    }
 
     /**
      * Retrieve the values of a given product
@@ -37,15 +49,15 @@ class ProductsHelper
      */
     public static function attributesToProperties(array $props): array
     {
-        $discount = ProductsHelper::getProductDiscountById($props['id']);
-        $props['brand'] = BrandsHelper::getBrandNameById($props['brand']);
+        $discount = ProductsRepository::getProductDiscountById($props['id']);
+        $props['brand'] = BrandsRepository::getBrandNameById($props['brand']);
         $props['discountRate'] = $discount;
-        $props['discount'] = ProductsHelper::computeDiscount($props['price'], $discount);
+        $props['discount'] = ProductsRepository::computeDiscount($props['price'], $discount);
 
         $props['featuresCaption'] = 'Information complémentaires';
-        $props['features'] = ProductsHelper::grabMoreInfo($props['more_infos']);
+        $props['features'] = ProductsRepository::grabMoreInfo($props['more_infos']);
 
-        $images = ImagesHelper::getImagesByProductId($props['id']);
+        $images = ImagesRepository::getImagesByProductId($props['id']);
         $props['images'] = $images;
 
         return $props;
@@ -63,7 +75,7 @@ class ProductsHelper
 
         if($phrase === null) {
             return $result;
-        } 
+        }
 
         $result = explode(';', $phrase);
 
@@ -96,10 +108,10 @@ class ProductsHelper
 
     /**
      * Get the discount price for the given amount and percent rate
-     * 
-     * @param float|string $price 
-     * @param int $percent 
-     * @return float 
+     *
+     * @param float|string $price
+     * @param int $percent
+     * @return float
      */
     public static function computeDiscount(float|string $price, int $percent): float
     {
@@ -151,7 +163,7 @@ class ProductsHelper
 
         $productId = Cache::has("product$slug") ? Cache::get("product$slug") : null;
         if($productId !== null) {
-            $result = ProductsHelper::getPropertiesFromCacheById($productId);
+            $result = ProductsRepository::getPropertiesFromCacheById($productId);
         }
 
         return $result;
@@ -170,10 +182,10 @@ class ProductsHelper
         {
             $id = $properties['id'];
             Cache::put("product$slug", $id);
-            ProductsHelper::putPropertiesInCacheById($id, $properties);
+            ProductsRepository::putPropertiesInCacheById($id, $properties);
         }
     }
-    
+
     /**
      * Retrieve the product page properties from the cache by ID
      *
@@ -201,4 +213,5 @@ class ProductsHelper
             Cache::put("product$id", $properties);
         }
     }
+
 }

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Library\Helpers\ImagesHelper;
+use App\Repositories\ImagesRepository;
 use App\Models\ProductImages;
 use App\Models\Products;
 use Illuminate\Support\Facades\DB;
@@ -85,7 +85,7 @@ class ProductModelTest extends TestCase
             'image' => 12,
         ]);
 
-        $images = ImagesHelper::getImagesByProductId($id);
+        $images = ImagesRepository::getImagesByProductId($id);
 
         $this->assertIsArray($images);
     }
