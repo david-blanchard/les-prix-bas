@@ -16,13 +16,13 @@ Le projet est développé à l'aide de **Laravel 8**.
 
 Le cache applicatif est géré par **Memcached**. Le serveur Memcached doit être installé et mis en service. L'extension **php-memcached** doit être installée.
 
-Dans l'alternative, vous pouver utiliser l'image Docker fournie qui regroupe tous les services nécessaires.
+Dans l'alternative, vous pouvez utiliser l'image Docker fournie qui regroupe tous les services nécessaires.
 
 ```zsh
 docker compose up -d --build --wait
 ```
 
-Si vous utilisez Docker, toutes les commandes `arisan` et `composer` doivent être précédées de `docker-compose exec php` pour être exécutées dans le conteneur.
+Si vous utilisez Docker, toutes les commandes `arisan` et `composer` doivent être précédées de `docker compose exec php` pour être exécutées dans le container.
 
 ### 1.2 - Installation
 
