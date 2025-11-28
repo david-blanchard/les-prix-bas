@@ -47,8 +47,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::resource('products', ProductsController::class);
     Route::resource('brands', BrandsController::class);
     Route::resource('images', ImagesController::class);
-    Route::resource('product_images', ProductImagesController::class);
     Route::get('product_images/{product}/create', [ProductImagesController::class, 'create'])->name('product_images.create');
+    Route::resource('product_images', ProductImagesController::class)->except(['create']);
 
 });
 
