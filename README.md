@@ -150,12 +150,6 @@ php artisan config:cache
 ### 3.1 - Migration des données
 
 
-Créez la base de données lesprixbas
-
-```zsh
-php artisan db:create
-```
-
 Créez la structure de la base de données
 
 ```zsh
@@ -168,11 +162,6 @@ Injectez les données
 php artisan db:seed
 ```
 
-### 3.2 - Lancement du projet
-
-```zsh
-php artisan serve
-```
 ## 4 - LesPrixBas côté visiteur
 
 L'application s'ouvre sur la page produit Veste en jean de la catégorie Mode Femme.
