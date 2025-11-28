@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 # Install system dependencies and PHP extensions
 RUN apk add --no-cache --virtual .build-deps \
@@ -45,6 +45,8 @@ RUN apk add --no-cache \
     && adduser $USERNAME www-data \
     && rm -rf /var/cache/apk/*
 
+RUN apk add --no-cache zsh git vim lynx curl \
+    && chsh -s /bin/zsh $USERNAME
 USER $USERNAME
 
 EXPOSE 9000
