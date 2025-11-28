@@ -51,7 +51,7 @@ class ProductImagesController extends Controller
     {
         $productId = $product['id'];
         $productName = $product['name'];
-        $brand = $this->brandsRepository->getBrandNameById($product['brand']);
+        $brand = $product['brand'] ? $this->brandsRepository->getBrandNameById($product['brand']) : 'Sans marque';
         $associatedImages = $this->imagesRepository->getImagesByProductId($productId);
 
         return View('admin.product_images.create', [
